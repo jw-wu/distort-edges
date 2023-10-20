@@ -1,0 +1,131 @@
+/* Menu */
+
+.component.switch {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+
+  padding: var(--default-padding);
+}
+
+
+/* Label */
+
+.component.switch label {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* Input */
+
+.component.switch input {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+}
+
+
+/* Slider */
+
+.component.switch .slider {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.component.switch.small .slider {
+  width: 1.75rem;
+  height: 1rem;
+  padding: 0.25rem;
+
+  border-radius: 0.5rem;
+}
+
+.component.switch.medium .slider {
+  width: 3.5rem;
+  height: 2rem;
+  padding: 0.25rem;
+
+  border-radius: 1rem;
+}
+
+.component.switch.large .slider {
+  width: 5rem;
+  height: 3rem;
+  padding: 0.25rem;
+
+  border-radius: 1.5rem;
+}
+
+.component.switch.contained.primary .slider {
+  background-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.primary input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+.component.switch.contained.secondary .slider {
+  background-color: color-mix(in srgb, var(--color-secondary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.secondary input:checked + .slider {
+  background-color: var(--color-secondary);
+}
+
+.component.switch.contained.tertiary .slider {
+  background-color: color-mix(in srgb, var(--color-tertiary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.tertiary input:checked + .slider {
+  background-color: var(--color-tertiary);
+}
+
+
+/* Handle */
+
+.component.switch .handle {
+  content: " ";
+  background-color: var(--color-bg);
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  transition: var(--transition-fast);
+}
+
+.component.switch.small .handle {
+  width: 0.5rem;
+  height: 0.5rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.small input:checked + .slider .handle {
+  left: 1rem !important;
+}
+
+.component.switch.medium .handle {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.medium input:checked + .slider .handle {
+  left: 1.75rem !important;
+}
+
+.component.switch.large .handle {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.large input:checked + .slider .handle {
+  left: 2.25rem !important;
+}

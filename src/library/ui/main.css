@@ -1,0 +1,70 @@
+/* Theme */
+
+@import "../../custom/ui-theme.css";
+
+
+/* Blocks */
+
+@import "./blocks/block.css";
+
+
+/* Components */
+
+@import "./components/textfield/textfield.css";
+@import "./components/textfield/textfield-removable.css";
+@import "./components/textfield/textfield-toggleable.css";
+@import "./components/checkbox/checkbox.css";
+@import "./components/button/button.css";
+@import "./components//dropdown/dropdown.css";
+@import "./components//menu/menu.css";
+@import "./components/control-list/control-list.css";
+@import "./components/control-list/control-list-item.css";
+@import "./components//switch/switch.css";
+
+
+
+body, div, input {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--figma-color-text);
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body, div {
+  font-size: 0.75rem;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+/* Disable event capturing in icon SVGs */
+
+.icon {
+  pointer-events: none;
+}
+
+
+
+/* Fill or hug */
+
+.fillContainer {
+  width: 100%;
+}
+
+
+
+/* Defaults */
+
+:root {
+  
+  /* Spacing */
+  --default-padding: 0.75rem;
+  --default-row-gap: 0.75rem;
+
+}

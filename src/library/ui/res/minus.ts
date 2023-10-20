@@ -1,0 +1,1 @@
+export const minusSVG = "M19 12.75V11.25H5V12.75H19Z";

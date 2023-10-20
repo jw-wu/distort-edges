@@ -1,0 +1,113 @@
+/* Dropdown */
+
+
+.component.dropdown {
+  width: 100%;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: var(--border-divider);
+}
+
+.component.dropdown:last-of-type {
+  border-bottom: 0;
+}
+
+.component.dropdown.small {
+  padding: 0.5rem;
+  row-gap: 0.25rem;
+}
+
+.component.dropdown.medium {
+  padding: 0.75rem;
+  row-gap: 0.25rem;
+}
+
+.component.dropdown.large {
+  padding: 0.75rem;
+  row-gap: 0.5rem;
+}
+
+
+/* Header */
+
+.component.dropdown .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+/* Label */
+
+.component.dropdown .label {
+  width: 100%;
+
+  padding-top: 0.5rem;
+
+  font-size: var(--typography-inputlabel-size) !important;
+}
+
+
+/* Primary content */
+
+.component.dropdown .primary-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+
+/* Select */
+
+.component.dropdown .selection-display {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.component.dropdown.small .selection-display {
+  height: 2rem;
+
+  font-size: var(--typography-body2-size) !important;
+}
+
+.component.dropdown.medium .selection-display {
+  height: 3rem;
+
+  font-size: var(--typography-h3-size) !important;
+  letter-spacing: -0.03em;
+}
+
+.component.dropdown.large .selection-display {
+  height: 5rem;
+
+  font-size: var(--typography-h1-size) !important;
+  letter-spacing: -0.06em;
+}
+
+.component.dropdown.disabled .selection-display {
+  color: var(--color-text-disabled);
+}
+
+
+/* Show menu icon */
+
+.component.dropdown .show-menu-icon {
+  position: relative;
+  top: 0.125rem;
+
+  transition: var(--transition-fast);
+}
+
+
+/* Menu */
+
+.component.dropdown .menu {
+  position: absolute;
+  top: 2.5rem;
+}

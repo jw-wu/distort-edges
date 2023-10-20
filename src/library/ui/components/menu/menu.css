@@ -1,0 +1,73 @@
+/* Menu */
+
+
+.component.menu {
+  width: calc(100% - var(--default-padding) - var(--default-padding));
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-bg-inverse);
+
+  border-radius: var(--border-radius-medium);
+
+  z-index: 500;
+  box-shadow: var(--shadow);
+}
+
+
+/* Menu options */
+
+.component.menu .option {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  row-gap: 2rem;
+
+  padding: var(--default-padding);
+
+  border-bottom: var(--border-divider);
+}
+
+.component.menu .option:nth-last-of-type(2) {
+  border-bottom: 0 !important;
+}
+
+
+/* Primary label */
+
+.component.menu .option .primary-label {
+  width: 100%;
+
+  color: var(--color-text-primary-oninverse);
+}
+
+.component.menu.small .option .primary-label {
+  font-size: var(--typography-body2-size) !important;
+}
+
+.component.menu.medium .option .primary-label {
+  font-size: var(--typography-h3-size) !important;
+}
+
+
+/* Secondary label */
+
+.component.menu .option .secondary-label {
+  color: var(--color-text-secondary-oninverse);
+}
+
+
+/* Invisible backdrop */
+
+.component.menu .invisible-backdrop {
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 400;
+}

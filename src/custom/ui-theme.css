@@ -1,0 +1,87 @@
+html {
+  font-size: 16px;
+}
+
+:root {
+
+  /* Typography */
+
+  --typography-h1-size: 4rem;
+  --typography-h2-size: 2rem;
+  --typography-h3-size: 1.5rem;
+  --typography-body1-size: 1rem;
+  --typography-body2-size: 0.75rem;
+  --typography-inputlabel-size: 0.75rem;
+
+
+
+  /* Colors */
+
+  --color-bg: var(--figma-color-bg);
+
+  --color-primary: var(--figma-color-icon);
+  --color-primary-light: color-mix(in srgb, var(--color-primary) 75%, var(--color-bg));
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, var(--color-bg-inverse));
+  --color-primary-contrast: var(--figma-color-text-oninverse);
+
+  --color-secondary: color-mix(in srgb, var(--figma-color-icon-secondary) 25%, var(--color-bg));
+  --color-secondary-light: color-mix(in srgb, var(--color-secondary) 75%, var(--color-bg));
+  --color-secondary-dark: color-mix(in srgb, var(--color-secondary) 75%, var(--color-bg-inverse));
+  --color-secondary-contrast: var(--figma-color-text);
+
+  --color-tertiary: color-mix(in srgb, var(--figma-color-bg-tertiary) 50%, var(--color-bg));
+  --color-tertiary-light: color-mix(in srgb, var(--color-tertiary) 25%, var(--color-bg));
+  --color-tertiary-dark: color-mix(in srgb, var(--color-bg-inverse) 10%, var(--color-tertiary) );
+  --color-tertiary-contrast: var(--figma-color-text);
+
+  --color-disabled: var(--figma-color-bg-disabled);
+  
+  --color-action-hover: color-mix(in srgb, var(--color-primary) 5%, transparent);
+
+  --color-text-primary: var(--figma-color-text);
+  --color-text-secondary: var(--figma-color-text-secondary);
+  --color-text-disabled: var(--figma-color-text-disabled);
+
+  --color-bg-inverse: var(--figma-color-bg-inverse);
+  --color-text-primary-oninverse: var(--figma-color-text-oninverse);
+  --color-text-secondary-oninverse: color-mix(in srgb, var(--color-text-primary-oninverse) 64%, var(--color-bg-inverse));
+  --color-text-disabled-oninverse: color-mix(in srgb, var(--color-text-primary-oninverse) 32%, var(--color-bg-inverse));;
+
+  --color-error: var(--figma-color-text-danger);
+
+
+
+  /* Border */
+
+  --border-divider: 1.5px solid var(--figma-color-border);
+  --border-outlined-thickness: 1.5px;
+
+
+
+  /* Border radius */
+
+  --border-radius-medium: 0.125rem;
+  --border-radius-large: 0.25rem;
+  --border-radius-xlarge: 0.5rem;
+
+
+  /* Drop shadow */
+
+  --shadow:
+    0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+
+  
+  /* Animation */
+
+  --transition-cubicbezier: cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-time-fast: 0.15s;
+
+  --transition-fast: all 0.15s cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-medium: all 0.25s cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.3, 0, 0.6, 1);
+
+}

@@ -1,0 +1,71 @@
+/* Button */
+
+
+.component.button.medium {
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+
+  border-radius: var(--border-radius-medium);
+}
+
+.component.button .label {
+  width: 100%;
+
+  text-align: center;
+  font-size: var(--typography-body2-size) !important;
+
+  color: inherit;
+}
+
+
+/* Colors */
+
+.component.button.primary.contained {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.component.button.primary.contained:hover {
+  background-color: var(--color-primary-light);
+}
+
+.component.button.primary.outlined {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-primary);
+}
+
+.component.button.primary.outlined:hover {
+  background-color: var(--color-tertiary-dark);
+}
+
+
+.component.button.secondary.contained {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-contrast);
+}
+
+.component.button.secondary.contained:hover {
+  background-color: var(--color-secondary-light);
+}
+
+
+.component.button.tertiary.contained {
+  background-color: var(--color-tertiary);
+  color: var(--color-tertiary-contrast);
+}
+
+.component.button.tertiary.contained:hover {
+  background-color: var(--color-tertiary-light);
+}
+
+
+/* Disabled state */
+
+.component.button.disabled {
+  background-color: var(--color-disabled) !important;
+  color: var(--color-text-disabled) !important;
+}

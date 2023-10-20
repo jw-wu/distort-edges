@@ -1,0 +1,50 @@
+/* Form elements */
+
+
+.form-label {
+  width: 100%;
+
+  font-size: var(--typography-inputlabel-size) !important;
+}
+
+.form-suffixlabel {
+  flex-shrink: 10;
+
+  text-align: right;
+  font-size: var(--typography-inputlabel-size) !important;
+  color: var(--color-text-secondary);
+}
+
+.helpertext {
+  width: 100%;
+  height: 1rem;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-end;
+
+  font-size: var(--typography-inputlabel-size) !important;
+  color: var(--color-text-secondary);
+
+  transition: var(--animation-medium);
+}
+
+.helpertext.error {
+  color: var(--color-error);
+}
+
+.helpertext.hidden {
+  height: 1px;
+}
+
+.input-element.disabled {
+  color: var(--color-text-disabled);
+}
+
+.input-element.enabled {
+  color: var(--color-text-primary);
+}
+
+.input-element.error {
+  color: var(--color-error);
+}
