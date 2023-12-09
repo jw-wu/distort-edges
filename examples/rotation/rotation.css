@@ -32,10 +32,6 @@ body {
   transition: transform 60s linear, fill .5s linear;
 }
 
-#shape-1 {
-  d: var(--d-shape-1);
-}
-
 
 
 #shape-2-container {
@@ -54,10 +50,6 @@ body {
   transition: transform 60s linear;
 }
 
-#shape-2 {
-  d: var(--d-shape-2);
-}
-
 
 
 #shape-3-container {
@@ -73,8 +65,4 @@ body {
 #shape-3-svg {
   transform-origin: center;
   transition: transform 60s linear, fill .5s linear;
-}
-
-#shape-3 {
-  d: var(--d-shape-3);
 }

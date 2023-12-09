@@ -50,12 +50,14 @@
 
       let distortedShape1 = new DistortedShape("M400 800C620.914 800 800 620.914 800 400C800 179.086 620.914 0 400 0C179.086 0 0 179.086 0 400C0 620.914 179.086 800 400 800Z", recipe.shape1);
 
-      document.documentElement.style.setProperty("--d-shape-1", `path("${distortedShape1.getDrawCommands(recipe.shape1)}")`);
+      const shape1 = document.getElementById("shape-1");
+      shape1.setAttribute("d", distortedShape1.getDrawCommands(recipe.shape1));
 
 
       let distortedShape2 = new DistortedShape("M400 800C179.086 800 0 620.914 0 400C0 179.086 179.086 0 400 0C620.914 0 800 179.086 800 400C800 620.914 620.914 800 400 800Z", recipe.shape2);
 
-      document.documentElement.style.setProperty("--d-shape-2", `path("${distortedShape2.getDrawCommands(recipe.shape2)}")`);
+      const shape2 = document.getElementById("shape-2");
+      shape2.setAttribute("d", distortedShape2.getDrawCommands(recipe.shape2));
 
 
       const shape1Node = document.getElementById("shape-1-svg");

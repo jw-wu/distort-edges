@@ -13,7 +13,7 @@
         <!-- Hours -->
         <div class="position-center">
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time1">
-            <path d="" fill="var(--color-object)"></path>
+            <path d="" fill="var(--color-object)" id="distorted-node-1"></path>
           </svg>
         </div>
         
@@ -27,7 +27,7 @@
         <!-- Minutes -->
         <div class="position-center">
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time2">
-            <path d="" fill="var(--color-object)"></path>
+            <path d="" fill="var(--color-object)" id="distorted-node-2"></path>
           </svg>
         </div>
         
@@ -41,7 +41,7 @@
         <!-- Seconds -->
         <div class="position-center">
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time3">
-            <path d="" fill="var(--color-object)"></path>
+            <path d="" fill="var(--color-object)" id="distorted-node-3"></path>
           </svg>
         </div>
         
@@ -115,14 +115,18 @@
         recipe.time1
       );
 
-      // Create SVG path variables with distortions.
-      document.documentElement.style.setProperty("--d-time1", `path("${distortedNode.getDrawCommands(recipe.time1)}")`);
-      document.documentElement.style.setProperty("--d-time2", `path("${distortedNode.getDrawCommands(recipe.time2)}")`);
-      document.documentElement.style.setProperty("--d-time3", `path("${distortedNode.getDrawCommands(recipe.time3)}")`);
+      const distortedNode1 = document.getElementById("distorted-node-1"),
+            distortedNode2 = document.getElementById("distorted-node-2"),
+            distortedNode3 = document.getElementById("distorted-node-3");
 
-      window.setInterval(refreshSVGPath, 3000, "--d-time1");
-      window.setInterval(refreshSVGPath, 1000, "--d-time2");
-      window.setInterval(refreshSVGPath, 100, "--d-time3");
+      // Create SVG path variables with distortions.
+      distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
+      distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
+      distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
+
+      window.setInterval(refreshSVGPath, 3000, "1");
+      window.setInterval(refreshSVGPath, 1000, "2");
+      window.setInterval(refreshSVGPath, 100, "3");
 
 
       // Sets up blinking animation for semi-colons.
@@ -182,9 +186,9 @@
           recipe.time3.variableDistortionDistance = false;
           recipe.time3.keepWithinOriginalSize = true;
 
-          document.documentElement.style.setProperty("--d-time1", `path("${distortedNode.getDrawCommands(recipe.time1)}")`);
-          document.documentElement.style.setProperty("--d-time2", `path("${distortedNode.getDrawCommands(recipe.time2)}")`);
-          document.documentElement.style.setProperty("--d-time3", `path("${distortedNode.getDrawCommands(recipe.time3)}")`);
+          distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
+          distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
+          distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
           
           roughenedEdges = false;
 
@@ -204,9 +208,9 @@
           recipe.time3.variableDistortionDistance = true;
           recipe.time1.keepWithinOriginalSize = false;
 
-          document.documentElement.style.setProperty("--d-time1", `path("${distortedNode.getDrawCommands(recipe.time1)}")`);
-          document.documentElement.style.setProperty("--d-time2", `path("${distortedNode.getDrawCommands(recipe.time2)}")`);
-          document.documentElement.style.setProperty("--d-time3", `path("${distortedNode.getDrawCommands(recipe.time3)}")`);
+          distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
+          distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
+          distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
           
           roughenedEdges = true;
 
@@ -216,11 +220,11 @@
 
 
       // Function to recreate SVG every 1s.
-      function refreshSVGPath(pathVar) {
+      function refreshSVGPath(nodeNr) {
 
-        switch (pathVar) {
+        switch (nodeNr) {
 
-          case "--d-time1":
+          case "1":
 
             if (roughenedEdges) {
 
@@ -259,12 +263,12 @@
 
             }
 
-            document.documentElement.style.setProperty(pathVar, `path("${distortedNode.getDrawCommands(recipe.time1)}")`);
+            distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
 
             break;
 
 
-          case "--d-time2":
+          case "2":
 
             if (roughenedEdges) {
 
@@ -303,12 +307,12 @@
 
             }
 
-            document.documentElement.style.setProperty(pathVar, `path("${distortedNode.getDrawCommands(recipe.time2)}")`);
+            distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
 
             break;
 
 
-          case "--d-time3":
+          case "3":
 
             if (roughenedEdges) {
 
@@ -347,7 +351,7 @@
 
             }
 
-            document.documentElement.style.setProperty(pathVar, `path("${distortedNode.getDrawCommands(recipe.time3)}")`);
+            distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
 
             break;
 

@@ -54,11 +54,9 @@ body {
 /* Morph animations */
 
 #sun-flare {
-  d: var(--d-sun-flare);
   transition: d 5s ease-in-out;
 }
 
 #sun-edge {
-  d: var(--d-sun-edge);
   transition: d 1s;
 }

@@ -75,6 +75,11 @@
       const zoom = document.getElementById("zoom");
 
 
+      // Get svg paths.
+      const sunFlare = document.getElementById("sun-flare"),
+            sunEdge = document.getElementById("sun-edge");
+
+
       // Create distorted paths.
       let sunFlareShape = new DistortedShape("M400 4.99997C618.152 4.99996 795 181.847 795 400C795 618.152 618.152 795 400 795C181.848 795 4.99999 618.152 4.99998 400C4.99997 181.848 181.847 4.99998 400 4.99997Z", recipe.flare);
 
@@ -152,11 +157,11 @@
         switch(sunVariant) {
 
           case "flare":
-            document.documentElement.style.setProperty("--d-sun-flare", `path("${sunFlareShape.getDrawCommands(recipe.flare)}")`);
+            sunFlare.setAttribute("d", sunFlareShape.getDrawCommands(recipe.flare));
             break;
           
           case "edge":
-            document.documentElement.style.setProperty("--d-sun-edge", `path("${sunEdgeShape.getDrawCommands(recipe.edge)}")`);
+            sunEdge.setAttribute("d", sunEdgeShape.getDrawCommands(recipe.edge));
             break;
 
         }

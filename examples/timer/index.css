@@ -40,18 +40,15 @@ svg {
 
 
 /* Morph animations */
-#time1 path {
-  d: var(--d-time1);
+#distorted-node-1 {
   transition: var(--transition-time1);
 }
 
-#time2 path {
-  d: var(--d-time2);
+#distorted-node-2 {
   transition: var(--transition-time2);
 }
 
-#time3 path {
-  d: var(--d-time3);
+#distorted-node-3 {
   transition: var(--transition-time3);
 }
 
