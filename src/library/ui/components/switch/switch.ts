@@ -1,4 +1,4 @@
-/* UI */
+/* System */
 import * as uiTypings from "../../system/types";
 import * as theme from "../../../../custom/ui-variants";
 
@@ -15,7 +15,9 @@ export class Switch extends uiTypings.UIFormComponent {
     color: theme.Color,
     state?: "on" | "off",
     label?: string,
-    callbacks?: Function[]
+    callbacks?: Function[],
+
+    removeBottomBorder?: boolean
   }) {
 
     super();
@@ -23,6 +25,8 @@ export class Switch extends uiTypings.UIFormComponent {
 
     // Component div.
     this.component.classList.add("component", "switch", settings.variant, settings.size, settings.color);
+    if (!settings.removeBottomBorder)
+      this.component.classList.add("border-bottom");
 
 
     // Container.
@@ -34,6 +38,7 @@ export class Switch extends uiTypings.UIFormComponent {
     if (settings.label) {
 
       this.label = document.createElement("div");
+      this.label.classList.add("label-text");
       this.label.textContent = settings.label;
 
     }
@@ -66,7 +71,7 @@ export class Switch extends uiTypings.UIFormComponent {
     this.getInput = this._getInput;
 
     if (settings.callbacks)
-      this.component.addEventListener("mousedown", (e) => {
+      this.container.addEventListener("click", (e) => {
         for (let callback of settings.callbacks!) {
           callback(e);
         }

@@ -1,5 +1,8 @@
-/* Types */             import * as uiTypes from "../../system/types";
-                        import * as theme from "../../../../custom/ui-variants";
+/* System */
+import * as uiTypes from "../../system/types";
+import * as theme from "../../../../custom/ui-variants";
+
+
 
 export class Button extends uiTypes.UIComponent {
 

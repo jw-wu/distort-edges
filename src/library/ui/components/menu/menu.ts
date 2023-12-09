@@ -1,9 +1,7 @@
-/* System */            import * as consoleTheme from "../../../console-theme";
-/* Types */             import { UIComponent } from "../../system/types";
-/* Theme */             import * as theme from "../../../../custom/ui-variants";
-
-/* Helpers */           import { icon } from "../../helpers/create-svg";
-/* Plugin */            import * as color from "../../../../plugins/general/color";
+/* System */
+import * as consoleTheme from "../../../console-theme";
+import { UIComponent } from "../../system/types";
+import * as theme from "../../../../custom/ui-variants";
 
 
 export class Menu extends UIComponent {

@@ -128,6 +128,12 @@ export class ModuleLibrary {
 
   }
 
+  getSoloModule(): OperationModule {
+
+    return this.modules.values().next().value;
+
+  }
+
 }
 
 

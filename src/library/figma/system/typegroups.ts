@@ -56,6 +56,16 @@ export const canBeStroked = (node: SceneNode): node is StrokableNode => (
   )
 );
 
+export type ShapeNode = RectangleNode | EllipseNode | PolygonNode | StarNode | VectorNode | BooleanOperationNode;
+export const isShapeNode = (node: SceneNode): node is ShapeNode => (
+  node.type === "RECTANGLE" ||
+  node.type === "ELLIPSE" ||
+  node.type === "POLYGON" ||
+  node.type === "STAR" ||
+  node.type === "VECTOR" ||
+  node.type === "BOOLEAN_OPERATION"
+);
+
 export const isRGB = (input: any): input is RGB => (
   typeof input.r === "number" &&
   typeof input.g === "number" &&

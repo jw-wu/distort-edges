@@ -1,13 +1,17 @@
-/* System */            import * as consoleTheme from "../../../console-theme";
-/* Types */             import { UIComponent } from "../../system/types";
-/* Theme */             import * as theme from "../../../../custom/ui-variants";
+/* System */
+import * as consoleTheme from "../../../console-theme";
+import { UIComponent } from "../../system/types";
+import * as theme from "../../../../custom/ui-variants";
 
-/* Helpers */           import { icon } from "../../helpers/create-svg";
-/* Plugin */            import * as color from "../../../../plugins/general/color";
-/* SVG */               import { minusSVG } from "../../res/minus";
-                        import { editSVG } from "../../res/edit";
-                        import { returnSVG } from "../../res/return";
-                        import { closeSVG } from "../../res/close";
+/* Helpers */
+import { icon } from "../../helpers/create-svg";
+import * as color from "../../helpers/color";
+
+/* SVG */
+import { minusSVG } from "../../res/minus";
+import { editSVG } from "../../res/edit";
+import { returnSVG } from "../../res/return";
+import { closeSVG } from "../../res/close";
 
 
 

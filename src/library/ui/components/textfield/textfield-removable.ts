@@ -1,15 +1,12 @@
-/* UI */
+/* System */
 import * as uiTypings from "../../system/types";
 import * as theme from "../../../../custom/ui-variants";
 import * as validation from "../../system/validation";
 
-/* UI helpers */
+/* Helpers */
 import { icon } from "../../helpers/create-svg";
 
-/* Plugin */
-import * as color from "../../../../plugins/general/color";
-
-/* SVG */
+/* SVGs */
 import { minusSVG } from "../../res/minus";
 import { TextField } from "./textfield";
 

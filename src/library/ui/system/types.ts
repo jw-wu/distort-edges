@@ -236,7 +236,7 @@ export class UIContainer {
 
     // Set padding.
     if (settings.defaultPadding)
-      this._setPadding("var(--default-padding");
+      this._setPadding("var(--default-padding)");
 
     if (settings.padding)
       this._setPadding(settings.padding);

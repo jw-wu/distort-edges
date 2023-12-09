@@ -1,11 +1,15 @@
 export function radToDeg(radian: number): number {
+
   return radian * (180 / Math.PI);
+
 }
 
 
 
 export function degToRad(degree: number): number {
+
   return degree * (Math.PI / 180);
+
 }
 
 
@@ -14,39 +18,47 @@ export function degToRad(degree: number): number {
 // https://www.mathsisfun.com/algebra/trig-finding-side-right-triangle.html
 
 // Only right angled triangles now.
-export function getHypotenuse( base: { adjacentSide?: number, oppositeSide?: number, angle?: number } ): number | null {
+export function getHypotenuse( input: { adjacentSide?: number, oppositeSide?: number, angle?: number } ): number | null {
 
   let argumentCount = 0;
 
-  if (base.adjacentSide) {
+  if (typeof input.adjacentSide !== "undefined" && !isNaN(input.adjacentSide)) {
+
     ++argumentCount;
-    base.adjacentSide = Math.abs(base.adjacentSide);
+    input.adjacentSide = Math.abs(input.adjacentSide);
+
   }
 
-  if (base.oppositeSide) {
+  if (typeof input.oppositeSide !== "undefined" && !isNaN(input.oppositeSide)) {
+
     ++argumentCount;
-    base.oppositeSide = Math.abs(base.oppositeSide);
+    input.oppositeSide = Math.abs(input.oppositeSide);
+
   }
 
-  if (base.angle) {
+  if (typeof input.angle !== "undefined" && !isNaN(input.angle)) {
+
     ++argumentCount;
-    base.angle = Math.abs(base.angle);
+    input.angle = Math.abs(input.angle);
+
   }
 
   if (argumentCount < 2)
+  
     console.log("%cNot enough values to calculate the hypotenuse of the triangle.", "color: #f30;");
 
   else {
 
     // Pythagoras theorem.
-    if (base.adjacentSide && base.oppositeSide)
-      return Math.sqrt(base.adjacentSide * base.adjacentSide + base.oppositeSide * base.oppositeSide);
+    if (typeof input.adjacentSide === "number" && typeof input.oppositeSide === "number")
+      return Math.sqrt(input.adjacentSide * input.adjacentSide + input.oppositeSide * input.oppositeSide) || 0;
 
-    else if (base.oppositeSide && base.angle)
-      return Math.abs(base.oppositeSide / Math.sin(degToRad(base.angle)));
+    else if (typeof input.oppositeSide === "number" && typeof input.angle === "number")
+      return Math.abs(input.oppositeSide / Math.sin(degToRad(input.angle)));
 
-    else if (base.adjacentSide && base.angle)
-      return Math.abs(base.adjacentSide / Math.cos(degToRad(base.angle)));
+    else if (typeof input.adjacentSide === "number" && typeof input.angle === "number")
+      return Math.abs(input.adjacentSide / Math.cos(degToRad(input.angle)));
+
   }
 
   return null;
@@ -55,22 +67,29 @@ export function getHypotenuse( base: { adjacentSide?: number, oppositeSide?: num
 
 
 
-export function getAdjacent( base: { hypotenuse?: number, oppositeSide?: number, angle?: number } ): number | null {
+export function getAdjacent( input: { hypotenuse?: number, oppositeSide?: number, angle?: number } ): number | null {
 
   let argumentCount = 0;
-  if (base.hypotenuse!) {
+
+  if (typeof input.hypotenuse !== "undefined" && !isNaN(input.hypotenuse)) {
+
     ++argumentCount;
-    base.hypotenuse = Math.abs(base.hypotenuse);
+    input.hypotenuse = Math.abs(input.hypotenuse);
+
   }
 
-  if (base.oppositeSide) {
+  if (typeof input.oppositeSide !== "undefined" && !isNaN(input.oppositeSide)) {
+
     ++argumentCount;
-    base.oppositeSide = Math.abs(base.oppositeSide);
+    input.oppositeSide = Math.abs(input.oppositeSide);
+
   }
 
-  if (base.angle) {
+  if (typeof input.angle !== "undefined" && !isNaN(input.angle)) {
+
     ++argumentCount;
-    base.angle = Math.abs(base.angle);
+    input.angle = Math.abs(input.angle);
+
   }
 
   if (argumentCount < 2)
@@ -79,17 +98,18 @@ export function getAdjacent( base: { hypotenuse?: number, oppositeSide?: number,
   else {
 
     // Angle is always next to "adjacent".
-    let oppositeAngle = (base.angle) ? 90 - base.angle : undefined;
+    let oppositeAngle = (input.angle) ? 90 - input.angle : undefined;
 
     // Pythagoras theorem.
-    if (base.hypotenuse && base.oppositeSide)
-      return Math.sqrt(base.hypotenuse * base.hypotenuse + base.oppositeSide * base.oppositeSide);
+    if (typeof input.hypotenuse === "number" && typeof input.oppositeSide === "number")
+      return Math.sqrt(input.hypotenuse * input.hypotenuse + input.oppositeSide * input.oppositeSide);
 
-    else if (base.oppositeSide && oppositeAngle)
-      return Math.abs(base.oppositeSide / Math.tan(degToRad(oppositeAngle)));
+    else if (typeof input.oppositeSide === "number" && typeof oppositeAngle === "number")
+      return Math.abs(input.oppositeSide / Math.tan(degToRad(oppositeAngle)));
 
-    else if (base.hypotenuse && oppositeAngle)
-      return Math.abs(Math.cos(degToRad(oppositeAngle)) * base.hypotenuse);
+    else if (typeof input.hypotenuse === "number" && typeof oppositeAngle === "number")
+      return Math.abs(Math.cos(degToRad(oppositeAngle)) * input.hypotenuse);
+
   }
 
   return null;
@@ -98,38 +118,47 @@ export function getAdjacent( base: { hypotenuse?: number, oppositeSide?: number,
 
 
 
-export function getOpposite( base: { hypotenuse?: number, adjacentSide?: number, angle?: number } ): number | null {
+export function getOpposite( input: { hypotenuse?: number, adjacentSide?: number, angle?: number } ): number | null {
 
   let argumentCount = 0;
-  if (base.hypotenuse) {
+
+  if (typeof input.hypotenuse !== "undefined" && !isNaN(input.hypotenuse)) {
+
     ++argumentCount;
-    base.hypotenuse = Math.abs(base.hypotenuse);
+    input.hypotenuse = Math.abs(input.hypotenuse);
+
   }
 
-  if (base.adjacentSide) {
+  if (typeof input.adjacentSide !== "undefined" && !isNaN(input.adjacentSide)) {
+
     ++argumentCount;
-    base.adjacentSide = Math.abs(base.adjacentSide);
+    input.adjacentSide = Math.abs(input.adjacentSide);
+
   }
 
-  if (base.angle) {
+  if (typeof input.angle !== "undefined" && !isNaN(input.angle)) {
+
     ++argumentCount;
-    base.angle = Math.abs(base.angle);
+    input.angle = Math.abs(input.angle);
+
   }
 
   if (argumentCount < 2)
+
     console.log("%cNot enough values to calculate the opoosite side of the triangle.", "color: #f30;");
 
   else {
 
     // Pythagoras theorem.
-    if (base.hypotenuse && base.adjacentSide)
-      return Math.sqrt(base.hypotenuse * base.hypotenuse + base.adjacentSide * base.adjacentSide);
+    if (typeof input.hypotenuse !== "undefined" && typeof input.adjacentSide !== "undefined")
+      return Math.sqrt(input.hypotenuse * input.hypotenuse + input.adjacentSide * input.adjacentSide);
 
-    else if (base.hypotenuse && base.angle)
-      return Math.abs(Math.sin(degToRad(base.angle)) * base.hypotenuse);
+    else if (typeof input.hypotenuse !== "undefined" && typeof input.angle !== "undefined")
+      return Math.abs(Math.sin(degToRad(input.angle)) * input.hypotenuse);
 
-    else if (base.adjacentSide && base.angle)
-      return Math.abs(Math.tan(degToRad(base.angle)) * base.adjacentSide);
+    else if (typeof input.adjacentSide !== "undefined" && typeof input.angle !== "undefined")
+      return Math.abs(Math.tan(degToRad(input.angle)) * input.adjacentSide);
+    
   }
 
   return null;

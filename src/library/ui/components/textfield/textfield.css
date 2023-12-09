@@ -43,14 +43,6 @@
   font-size: var(--typography-inputlabel-size) !important;
 }
 
-.component.textfield .suffixlabel {
-  flex-shrink: 10;
-
-  text-align: right;
-  font-size: var(--typography-inputlabel-size) !important;
-  color: var(--color-text-secondary);
-}
-
 .component.textfield.disabled .label {
   color: var(--color-text-disabled);
 }
@@ -151,6 +143,14 @@ input {
 
 /* Suffix label */
 
+.component.textfield .suffix-label {
+  flex-shrink: 10;
+
+  text-align: right;
+  font-size: var(--typography-inputlabel-size) !important;
+  color: var(--color-text-secondary);
+}
+
 .component.textfield.disabled .suffix-label {
   color: var(--color-text-disabled);
 }
@@ -159,9 +159,9 @@ input {
 
 /* Helper texts */
 
-.component.textfield .helpertext {
+.component.textfield .helper-text {
   width: 100%;
-  height: 1rem;
+  min-height: 1rem;
   box-sizing: border-box;
 
   display: flex;
@@ -173,10 +173,10 @@ input {
   transition: var(--transition-medium);
 }
 
-.component.textfield .helpertext.error {
+.component.textfield .helper-text.error {
   color: var(--color-error);
 }
 
-.component.textfield .helpertext.hidden {
-  height: 1px;
+.component.textfield .helper-text.hidden {
+  min-height: 0.0001rem;
 }

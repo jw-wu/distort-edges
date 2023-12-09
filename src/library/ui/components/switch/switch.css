@@ -3,10 +3,21 @@
 .component.switch {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   column-gap: 0.5rem;
 
   padding: var(--default-padding);
 }
+
+.component.switch.border-bottom {
+  border-bottom: var(--border-divider);
+}
+
+.component.switch.border-bottom:last-of-type {
+  border-bottom: 0;
+}
+
 
 
 /* Label */
@@ -17,6 +28,15 @@
 }
 
 
+
+/* Label text */
+
+.component.switch .label-text {
+  padding: 0.5rem 0;
+}
+
+
+
 /* Input */
 
 .component.switch input {
@@ -24,6 +44,7 @@
   max-width: 0;
   max-height: 0;
 }
+
 
 
 /* Slider */
@@ -38,23 +59,20 @@
 .component.switch.small .slider {
   width: 1.75rem;
   height: 1rem;
-  padding: 0.25rem;
 
   border-radius: 0.5rem;
 }
 
 .component.switch.medium .slider {
-  width: 3.5rem;
-  height: 2rem;
-  padding: 0.25rem;
+  width: 2.75rem;
+  height: 1.5rem;
 
-  border-radius: 1rem;
+  border-radius: 0.75rem;
 }
 
 .component.switch.large .slider {
   width: 5rem;
   height: 3rem;
-  padding: 0.25rem;
 
   border-radius: 1.5rem;
 }
@@ -84,6 +102,7 @@
 }
 
 
+
 /* Handle */
 
 .component.switch .handle {
@@ -91,6 +110,7 @@
   background-color: var(--color-bg);
 
   position: absolute;
+  top: 0.25rem;
 
   border-radius: 50%;
 
@@ -109,14 +129,14 @@
 }
 
 .component.switch.medium .handle {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
 
   left: 0.25rem;
 }
 
 .component.switch.medium input:checked + .slider .handle {
-  left: 1.75rem !important;
+  left: 1.5rem !important;
 }
 
 .component.switch.large .handle {

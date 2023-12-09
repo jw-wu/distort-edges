@@ -1,0 +1,80 @@
+:root {
+  --d-shape-1: ;
+  --d-shape-2: ;
+  --d-shape-3: ;
+}
+
+body {
+  margin: 0 auto;
+}
+
+#container {
+  position: relative;
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+
+
+#shape-1-container {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+
+  width: 800px;
+  height: 800px;
+}
+
+#shape-1-svg {
+  transform-origin: center;
+  transition: transform 60s linear, fill .5s linear;
+}
+
+#shape-1 {
+  d: var(--d-shape-1);
+}
+
+
+
+#shape-2-container {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+
+  width: 800px;
+  height: 800px;
+}
+
+#shape-2-svg {
+  transform-origin: center;
+  transform: rotate(0deg) scale(200%);
+  transition: transform 60s linear;
+}
+
+#shape-2 {
+  d: var(--d-shape-2);
+}
+
+
+
+#shape-3-container {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+
+  width: 800px;
+  height: 800px;
+}
+
+#shape-3-svg {
+  transform-origin: center;
+  transition: transform 60s linear, fill .5s linear;
+}
+
+#shape-3 {
+  d: var(--d-shape-3);
+}

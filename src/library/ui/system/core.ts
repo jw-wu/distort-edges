@@ -7,9 +7,10 @@ export class UI {
   protected panel: HTMLDivElement;
   protected width: number;
   protected height: number = 0;
+  protected additionalHeight: number;
   
 
-  constructor(settings: { width: number }) {
+  constructor(settings: { width: number, additionalHeight?: number }) {
 
     // Set UI div.
     let insertionPoint = document.getElementById("ui");
@@ -21,8 +22,9 @@ export class UI {
       document.body.appendChild(this.panel);
     }
 
-    // Store width of UI.
+    // Store width and additionalHeight of UI.
     this.width = settings.width;
+    this.additionalHeight = settings.additionalHeight ?? 0;
 
 
     // Resize UI.
@@ -64,7 +66,7 @@ export class UI {
       parent.postMessage({ pluginMessage: {
         call: "ui",
         command: "resize",
-        args: { width: this.width, height: this.panel.offsetHeight + 2 }
+        args: { width: this.width, height: this.panel.offsetHeight + this.additionalHeight }
       } }, "*");
 
     });
@@ -77,17 +79,21 @@ export class UI {
   }
 
 
-  resize(settings: { width: number | "nochange", height: number | "nochange" }): void {
+  resize(settings: { width: number | "nochange" | "dom", height: number | "nochange" | "dom" }): void {
 
       if (typeof settings.width === "number")
         this.width = settings.width;
+
+      if (typeof settings.height === "number")
+        this.height = settings.height;
+
 
       parent.postMessage({ pluginMessage: {
         call: "ui",
         command: "resize",
         args: {
-          width: (settings.width === "nochange") ? this.width : settings.width,
-          height: (settings.height === "nochange") ? this.height : settings.height
+          width: (settings.width === "dom") ? this.panel.offsetWidth : this.width,
+          height: (settings.height === "dom") ? this.panel.offsetHeight + this.additionalHeight : this.height
         }
       } }, "*");
 

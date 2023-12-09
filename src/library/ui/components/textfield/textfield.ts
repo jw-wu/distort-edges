@@ -3,14 +3,8 @@ import * as uiTypings from "../../system/types";
 import * as theme from "../../../../custom/ui-variants";
 import * as validation from "../../system/validation";
 
-/* UI helpers */
-import { icon } from "../../helpers/create-svg";
-
-/* Plugin */
-import * as color from "../../../../plugins/general/color";
-
-/* SVG */
-import { minusSVG } from "../../res/minus";
+/* Plugins */
+import * as color from "../../helpers/color";
 
 
 
@@ -31,7 +25,7 @@ export class TextField extends uiTypings.UIFormComponent {
   constructor(settings: {
 
       label: string,
-      inputType: "text" | "integer" | "number",
+      inputType: "text" | "integer" | "number" | "positiveNumber" | "negativeNumber",
       size: theme.Size |
             { padding: string,
               inputTextSize: string },
@@ -148,7 +142,7 @@ export class TextField extends uiTypings.UIFormComponent {
 
 
       // Helper/error text.
-      this.helperText.classList.add("helpertext", "hidden");
+      this.helperText.classList.add("helper-text", "hidden");
 
       // Append.
       this.component.appendChild(this.helperText);
@@ -164,6 +158,15 @@ export class TextField extends uiTypings.UIFormComponent {
       // Listeners.
       if (settings.inputType === "integer")
         this.input.addEventListener("keypress", validation.validateInteger);
+
+      else if (settings.inputType === "number")
+        this.input.addEventListener("keypress", validation.validateNumber);
+
+      else if (settings.inputType === "positiveNumber")
+        this.input.addEventListener("keypress", validation.validatePositiveNumber);
+
+      else if (settings.inputType === "negativeNumber")
+        this.input.addEventListener("keypress", validation.validateNegativeNumber);
 
     }
 
@@ -213,8 +216,8 @@ export class TextField extends uiTypings.UIFormComponent {
 
     setError(message: string): void {
 
+      this.helperText.classList.add("error");
       this.setHelperText(message);
-      this.helperText.classList.remove("hidden");
 
     }
 

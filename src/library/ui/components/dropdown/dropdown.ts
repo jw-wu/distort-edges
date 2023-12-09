@@ -1,12 +1,17 @@
-/* System */            import * as consoleTheme from "../../../console-theme";
-/* Types */             import { UIFormComponent } from "../../system/types";
-/* Theme */             import * as theme from "../../../../custom/ui-variants";
-/* Components */        import { Menu } from "../menu/menu";
+/* System */
+import * as consoleTheme from "../../../console-theme";
+import { UIFormComponent } from "../../system/types";
+import * as theme from "../../../../custom/ui-variants";
 
-/* Helpers */           import { icon } from "../../helpers/create-svg";
-/* Plugin */            import * as color from "../../../../plugins/general/color";
-/* SVG */               import { minusSVG } from "../../res/minus";
-                        import { chevronSVG } from "../../res/chevron";
+/* Components */
+import { Menu } from "../menu/menu";
+
+/* Helpers */
+import { icon } from "../../helpers/create-svg";
+
+/* SVG */
+import { minusSVG } from "../../res/minus";
+import { chevronSVG } from "../../res/chevron";
 
 
 export class Dropdown extends UIFormComponent {

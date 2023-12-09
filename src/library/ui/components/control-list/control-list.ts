@@ -1,11 +1,14 @@
-/* System */            import * as consoleTheme from "../../../console-theme";
-/* Types */             import * as types from "../../system/types";
+/* System */
+import * as consoleTheme from "../../../console-theme";
+import * as types from "../../system/types";
+import * as theme from "../../../../custom/ui-variants";
 
-/* Theme */             import * as theme from "../../../../custom/ui-variants";
+/* Helpers */
+import * as color from "../../helpers/color";
 
-/* Plugins */           import * as color from "../../../../plugins/general/color";
-/* Components */        import { Button } from "../button/button";
-                        import { ControlListItem } from "./control-list-item";
+/* Components */
+import { Button } from "../button/button";
+import { ControlListItem } from "./control-list-item";
 
 
 

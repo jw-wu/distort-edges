@@ -1,7 +1,7 @@
 /* Theme */           import * as theme from "../console-theme";
 
 /* Modules */         import * as modules from "./system/modules";
-                      import { library } from "../../custom/module-library"; 
+                      import { library } from "../../custom/script-library"; 
 
 
 // Log to console for debugging.
@@ -42,13 +42,15 @@ figma.on("run", async ({ parameters }: RunEvent) => {
   // Run module if it is found.
   if (pluginModules) {
 
+    selectedModule = (figma.command.length === 0 && pluginModules.moduleCount() === 1) ?
+      pluginModules.getSoloModule() :
+      pluginModules.matchCommandToModule(figma.command);
+    
     // If no command is found in the user input, the module library should have only 1 module, which should automatically be run.
     if (figma.command.length === 0 && pluginModules.moduleCount() === 1)
       pluginModules.runSoloModule();
-
-    selectedModule = pluginModules.matchCommandToModule(figma.command);
     
-    if (selectedModule) {
+    else if (selectedModule) {
       if (selectedModule.isAsync) await selectedModule.run(parameters);
       else selectedModule.run(parameters);
 

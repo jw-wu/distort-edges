@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title></title>
+    <script src="../../dist/js/umd/distortedges.js"></script>
+    <link rel="stylesheet" href="./rotation.css">
+    <link rel="stylesheet" href="./hud.css">
+  </head>
+  <body>
+
+    <div id="container">
+
+      <div id="shape-1-container">
+        <svg viewBox="0 0 800 800" fill="#cdb4db" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" id="shape-1-svg">
+          <path d="" id="shape-1"></path>
+        </svg>
+      </div>
+
+      <div id="shape-2-container">
+        <svg viewBox="0 0 800 800" fill="#fff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" id="shape-2-svg">
+          <path d="" id="shape-2"></path>
+        </svg>
+      </div>
+
+    </div>
+
+    <div id="hud">
+      <div id="title">Distort Edges</div>
+    </div>
+
+
+    <script>
+
+      let recipe =  { shape1:         { variableDistortionDistance: false,
+                                        maximumDistortionDistance: 400,
+                                        variableDistanceApart: false,
+                                        distanceApart: 10,
+                                        handleDistancePeak: 0,
+                                        handleDistanceTrough: 0.2,
+                                        keepWithinOriginalSize: true,
+                                      },
+                      shape2:         { variableDistortionDistance: false,
+                                        maximumDistortionDistance: 400,
+                                        variableDistanceApart: false,
+                                        distanceApart: 10,
+                                        handleDistancePeak: 0,
+                                        handleDistanceTrough: 0.5,
+                                        keepWithinOriginalSize: true,
+                                      }
+      };
+
+      let distortedShape1 = new DistortedShape("M400 800C620.914 800 800 620.914 800 400C800 179.086 620.914 0 400 0C179.086 0 0 179.086 0 400C0 620.914 179.086 800 400 800Z", recipe.shape1);
+
+      document.documentElement.style.setProperty("--d-shape-1", `path("${distortedShape1.getDrawCommands(recipe.shape1)}")`);
+
+
+      let distortedShape2 = new DistortedShape("M400 800C179.086 800 0 620.914 0 400C0 179.086 179.086 0 400 0C620.914 0 800 179.086 800 400C800 620.914 620.914 800 400 800Z", recipe.shape2);
+
+      document.documentElement.style.setProperty("--d-shape-2", `path("${distortedShape2.getDrawCommands(recipe.shape2)}")`);
+
+
+      const shape1Node = document.getElementById("shape-1-svg");
+      let enlarged = true;
+
+      shape1Node.style.transform = "rotate(0deg) scale(100%)";
+
+      setTimeout(() => {
+        shape1Node.style.transform = "rotate(90deg) scale(400%)";
+      }, 100);
+
+      setInterval(() => {
+
+        if (enlarged) {
+          shape1Node.style.transform = "rotate(0deg) scale(100%)";
+          enlarged = false;
+        }
+
+        else {
+          shape1Node.style.transform = "rotate(90deg) scale(400%)";
+          enlarged = true;
+        }
+
+      }, 60000);
+
+
+      const colors = [ "#ffc8dd", "#ffafcc", "#bde0fe", "#a2d2ff", "#cdb4db" ];
+      let currentColor = 0;
+
+      setInterval(() => {
+
+        shape1Node.setAttribute("fill", colors[currentColor]);        
+        currentColor = (currentColor === colors.length - 1) ? 0 : currentColor + 1;
+
+      }, 3000);
+
+
+    </script>
+
+  </body>
+</html>
