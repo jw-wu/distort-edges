@@ -47,6 +47,33 @@ export class VectorNodeModel {
 
         this.commands.push(newVectorCommand);
 
+
+        // If the last draw command is at the same coords as the first, close it with an L.
+        if (entry === "Z") {
+
+          const previousCommand = this.getPreviousCommand(newVectorCommand),
+                firstCommand = this.getFirstCommandOnPath(newVectorCommand);
+
+          if (previousCommand) {
+
+            if (previousCommand.coords.x !== firstCommand.coords.x || previousCommand.coords.y !== firstCommand.coords.y) {
+
+              let start = this.getFirstCommandOnPath(newVectorCommand);
+              this.commands.splice(this.commands.length - 1, 0, {
+                type: "L",
+                handles: [ ],
+                coords: start.coords,
+                origin: previousCommand.coords,
+                winding: (windingCalculation.area > 0) ? "counter-clockwise" : "clockwise"
+              });
+
+            }
+          }
+
+        }
+        
+
+        // Calculate winding direction.
         if (entry !== "Z") {
 
           windingCalculation.vectorCommands.push(newVectorCommand);
@@ -63,7 +90,16 @@ export class VectorNodeModel {
           for (let i = 0; i < windingCalculation.vectorCommands.length; ++i) {
 
             let vectorCommand = windingCalculation.vectorCommands[i];
-            vectorCommand.winding = windingDirection;
+
+            if (vectorCommand.type === "Z") {
+
+              const previousCommand = this.getPreviousCommand(vectorCommand);
+              vectorCommand.winding = (previousCommand) ? previousCommand.winding : windingDirection;
+
+            }
+
+            else
+              vectorCommand.winding = windingDirection;
 
           }
 
@@ -193,27 +229,6 @@ export class VectorNodeModel {
               
             }
 
-            break;
-
-
-          // Do we need this?
-          case "Z":           
-
-            const previousCommand = this.getPreviousCommand(vectorCommand);
-
-            if (previousCommand && previousCommand.coords !== this.getCommand(0).coords) {
-
-              let start = this.getCommand(0);
-              this.commands.push({
-                type: "L",
-                handles: [ ],
-                coords: { x: start.coords.x, y: start.coords.y },
-                origin: previousCommand.coords,
-                winding: (windingCalculation.area > 0) ? "counter-clockwise" : "clockwise"
-              });
-
-            }
-            
             break;
 
         }

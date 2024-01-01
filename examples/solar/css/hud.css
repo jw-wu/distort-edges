@@ -1,0 +1,56 @@
+/* HUD */
+
+#hud {
+  position: fixed;
+  left: 1.2rem;
+  bottom: 1.5rem;
+
+  width: calc(100vw - 2.4rem);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  color: #fff;
+}
+
+#title {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 0.85em;
+  text-align: left;
+  text-wrap: nowrap;
+
+  transform: scale(1, 1.5);
+  transform-origin: 50% 100%;
+}
+
+@media only screen and (orientation: portrait) {
+  #title {
+    font-size: 1.5rem;
+    text-wrap: wrap;
+  }
+}
+
+#zoom {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: opacity .2s;
+}
+
+#zoom:hover {
+  opacity: .3;
+}

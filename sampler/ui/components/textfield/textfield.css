@@ -1,0 +1,160 @@
+/* TextField */
+
+
+.component.textfield {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.component.textfield.small {
+  padding: 0.35rem 0.5rem 0.35rem 0.7rem;
+  row-gap: 0.25rem;
+}
+
+.component.textfield.medium {
+  padding: 0.5rem 0.7rem 0.5rem 1rem;
+  row-gap: 0.25rem;
+}
+
+.component.textfield.large {
+  padding: 0.5rem 0.7rem 0.25rem 1rem;
+  row-gap: 0.25rem;
+}
+
+.component.textfield.border-bottom {
+  border-bottom: var(--border-divider);
+}
+
+.component.textfield.border-bottom:last-of-type {
+  border-bottom: 0;
+}
+
+
+
+/* Label */
+
+.component.textfield .label {
+  width: 100%;
+
+  padding-top: 0.5rem;
+
+  font-size: var(--typography-inputlabel-size) !important;
+}
+
+.component.textfield.disabled .label {
+  color: var(--color-text-disabled);
+}
+
+
+
+/* Primary content */
+
+.component.textfield .primary-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+
+
+/* Input field */
+
+.component.textfield .input-title, .component.textfield .input-area {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.input-area {
+  column-gap: 1rem;;
+}
+
+
+
+/* Input */
+
+input {
+  margin: 0;
+  width: 100%;
+
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  color: var(--color-text-primary);
+
+  box-sizing: border-box;
+}
+
+.component.textfield.small input {
+  height: 2rem;
+
+  font-size: var(--typography-body2-size);
+}
+
+.component.textfield.medium input {
+  height: 3rem;
+
+  font-size: var(--typography-h3-size);
+  letter-spacing: -0.01em;
+}
+
+.component.textfield.large input {
+  height: 4rem;
+
+  font-size: var(--typography-h1-size);
+  letter-spacing: -0.03em;
+}
+
+.component.textfield.custom input {
+  height: auto;
+}
+
+.component.textfield.disabled input {
+  color: var(--color-text-disabled);
+}
+
+
+
+/* Suffix label */
+
+.component.textfield .suffix-label {
+  flex-shrink: 10;
+
+  text-align: right;
+  font-size: var(--typography-inputlabel-size) !important;
+  color: var(--color-text-secondary);
+}
+
+.component.textfield.disabled .suffix-label {
+  color: var(--color-text-disabled);
+}
+
+
+
+/* Helper texts */
+
+.component.textfield .helper-text {
+  width: 100%;
+  min-height: 1rem;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-end;
+
+  font-size: var(--typography-inputlabel-size) !important;
+  color: var(--color-text-secondary);
+
+  transition: var(--transition-medium);
+}
+
+.component.textfield .helper-text.error {
+  color: var(--color-error);
+}
+
+.component.textfield .helper-text.hidden {
+  min-height: 0.0001rem;
+}

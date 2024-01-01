@@ -1,0 +1,62 @@
+#space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Sun */
+
+#sun-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+#sun-container.fit-to-width {
+  width: 98vw;
+  height: 100vw;
+  margin: 1vw;
+}
+
+#sun-container.fit-to-height {
+  width: 98vw;
+  height: 98vh;
+  margin: 1vh;
+}
+
+
+
+#sun {
+  display: inline-block;
+  transition: all 0.5s ease-out;
+  overflow: visible;
+}
+
+#sun.fit-to-width {
+  width: 98vw;
+}
+
+#sun.fit-to-height {
+  height: 98vh;
+}
+
+
+
+/* Morph animations */
+
+#sun-flare {
+  transition: d 5s ease-in-out;
+}
+
+#sun-nucleus {
+  transition: d 1s;
+}
+
+
+@media only screen and (max-width: 599px) {
+  #sun-nucleus {
+    fill: #ff5500 !important;
+  }
+}

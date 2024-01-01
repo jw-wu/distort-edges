@@ -1,0 +1,99 @@
+@import "./components/textfield/textfield.css";
+@import "./components/switch/switch.css";
+@import "./components/button/button.css";
+@import "./components/control-list/control-list-item.css";
+@import "./components/control-list/control-list.css";
+
+:root {
+
+  /* Typography */
+
+  --typography-h1-size: 3rem;
+  --typography-h2-size: 2rem;
+  --typography-h3-size: 1.5rem;
+  --typography-body1-size: 1rem;
+  --typography-body2-size: 0.75rem;
+  --typography-inputlabel-size: 0.75rem;
+
+
+
+  /* Colors */
+
+  --color-common-white: #f6f2f2;
+  --color-common-black: #111;
+  --color-orange: #ed8008;
+
+  --color-bg: var(--color-common-white);
+  --color-bg-inverse: var(--color-common-black);
+
+  --color-primary: var(--color-common-black);
+  --color-primary-light: color-mix(in srgb, var(--color-primary) 75%, var(--color-common-white));
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, var(--color-common-black));
+  --color-primary-contrast: var(--color-common-white);
+
+  --color-secondary: color-mix(in srgb, var(--color-primary) 60%, var(--color-common-white));
+  --color-secondary-light: color-mix(in srgb, var(--color-secondary) 75%, var(--color-common-white));
+  --color-secondary-dark: color-mix(in srgb, var(--color-secondary) 75%, var(--color-common-black));
+  --color-secondary-contrast: var(--color-white);
+
+  --color-tertiary: color-mix(in srgb, var(--color-primary) 25%, var(--color-common-white));
+  --color-tertiary-light: color-mix(in srgb, var(--color-tertiary) 75%, var(--color-common-white));
+  --color-tertiary-dark: color-mix(in srgb, var(--color-tertiary) 75%, var(--color-common-black) );
+  --color-tertiary-contrast: var(--color-common-black);
+
+  --color-disabled: color-mix(in srgb, var(--color-primary) 20%, var(--color-common-white));
+  
+  --color-action-hover: color-mix(in srgb, var(--color-primary) 5%, transparent);
+
+  --color-text-primary: var(--color-common-black);
+  --color-text-secondary: color-mix(in srgb, var(--color-primary) 64%, var(--color-common-white));
+  --color-text-disabled: color-mix(in srgb, var(--color-primary) 32%, var(--color-common-white));
+
+  --color-text-primary-oninverse: var(--color-common-white);
+  --color-text-secondary-oninverse: color-mix(in srgb, var(--color-text-primary-oninverse) 64%, var(--color-bg-inverse));
+  --color-text-disabled-oninverse: color-mix(in srgb, var(--color-text-primary-oninverse) 32%, var(--color-bg-inverse));;
+
+  --color-error: #ff3300;
+
+  --color-divider: color-mix(in srgb, var(--color-primary) 8%, transparent);
+
+
+
+  /* Border */
+
+  --border-divider: 1.5px solid var(--color-divider);
+  --border-outlined-thickness: 1.5px;
+
+
+
+  /* Border radius */
+
+  --border-radius-medium: 0.125rem;
+  --border-radius-large: 0.25rem;
+  --border-radius-xlarge: 0.5rem;
+
+
+  /* Drop shadow */
+
+  --shadow:
+    0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+
+  
+  /* Animation */
+
+  --transition-cubicbezier: cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-time-fast: 0.15s;
+
+  --transition-fast: all 0.15s cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-medium: all 0.25s cubic-bezier(0.3, 0, 0.6, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.3, 0, 0.6, 1);
+
+}
+
+div {
+  box-sizing: border-box;
+}

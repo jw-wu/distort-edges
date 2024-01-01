@@ -1,0 +1,94 @@
+/* Control list */
+
+.component.control-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--default-row-gap);
+
+  padding: 1rem;
+}
+
+
+/* List */
+
+.component.control-list .list {
+  position: relative;
+
+  display: flex;
+}
+
+.component.control-list.vertical .list {
+  flex-direction: column;
+  row-gap: calc(var(--default-row-gap) / 2);
+}
+
+.component.control-list.horizontal .list {
+  flex-direction: row;
+  column-gap: 0.5rem;
+}
+
+
+/* Selection indication */
+
+.component.control-list .selection-indication {
+  position: absolute;
+  
+  padding: 0.5rem;
+  border-radius: var(--border-radius-medium);
+
+  transition: var(--transition-fast);
+}
+
+.component.control-list.vertical .selection-indication {
+  width: 100%;
+  top: 0;
+}
+
+.component.control-list.horizontal .selection-indication {
+  height: 100%;
+  left: 0;
+}
+
+
+.component.control-list.contained.primary .selection-indication {
+  background-color: var(--color-primary);
+}
+
+.component.control-list.contained.secondary .selection-indication {
+  background-color: var(--color-secondary);
+}
+
+.component.control-list.contained.tertiary .selection-indication {
+  background-color: var(--color-tertiary);
+}
+
+.component.control-list.outlined.primary .selection-indication {
+  border-width: var(--border-outlined-thickness);
+  border-style: solid;
+  border-color: var(--color-primary);
+}
+
+.component.control-list.outlined.secondary .selection-indication {
+  border-width: var(--border-outlined-thickness);
+  border-style: solid;
+  border-color: var(--color-secondary);
+}
+
+.component.control-list.outlined.tertiary .selection-indication {
+  border-width: var(--border-outlined-thickness);
+  border-style: solid;
+  border-color: var(--color-tertiary);
+}
+
+
+.component.control-list.small .selection-indication {
+  font-size: var(--typography-body2-size);
+}
+
+.component.control-list.medium .selection-indication {
+  font-size: var(--typography-h2-size);
+}
+
+.component.control-list.large .selection-indication {
+  font-size: var(--typography-h3-size);
+}

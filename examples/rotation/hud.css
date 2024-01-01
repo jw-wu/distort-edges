@@ -15,12 +15,20 @@
 }
 
 #title {
-  width: 100%;
-
   font-family: "Times New Roman", Times, serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 2rem;
+  line-height: 0.85em;
   text-align: left;
+  text-wrap: nowrap;
 
   transform: scale(1, 1.5);
+  transform-origin: 50% 100%;
+}
+
+@media only screen and (orientation: portrait) {
+  #title {
+    font-size: 1.5rem;
+    text-wrap: wrap;
+  }
 }

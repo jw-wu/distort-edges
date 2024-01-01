@@ -13,5 +13,5 @@
       "none"
     ]
   },
-  "ui": "dist/figma/main-ui.html"
+  "ui": "dist/figma/ui/gui.html"
 }

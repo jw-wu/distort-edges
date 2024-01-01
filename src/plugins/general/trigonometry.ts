@@ -44,7 +44,6 @@ export function getHypotenuse( input: { adjacentSide?: number, oppositeSide?: nu
   }
 
   if (argumentCount < 2)
-  
     console.log("%cNot enough values to calculate the hypotenuse of the triangle.", "color: #f30;");
 
   else {

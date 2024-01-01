@@ -1,0 +1,14 @@
+html {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+body {
+  background-color: #000612;;
+  margin: 0 auto;
+}
+
+svg {
+  overflow: visible;
+}

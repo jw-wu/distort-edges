@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./rotation.css">
     <link rel="stylesheet" href="./hud.css">
   </head>
-  <body>
+  <body style="background-color: #000;">
 
     <div id="container">
 
@@ -16,7 +16,7 @@
       </div>
 
       <div id="shape-2-container">
-        <svg viewBox="0 0 800 800" fill="#fff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" id="shape-2-svg">
+        <svg viewBox="0 0 800 800" fill="#000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" id="shape-2-svg">
           <path d="" id="shape-2"></path>
         </svg>
       </div>
@@ -63,21 +63,21 @@
       const shape1Node = document.getElementById("shape-1-svg");
       let enlarged = true;
 
-      shape1Node.style.transform = "rotate(0deg) scale(100%)";
+      shape1Node.style.transform = "rotate(0deg) scale(200%)";
 
       setTimeout(() => {
-        shape1Node.style.transform = "rotate(90deg) scale(400%)";
+        shape1Node.style.transform = "rotate(90deg) scale(600%)";
       }, 100);
 
       setInterval(() => {
 
         if (enlarged) {
-          shape1Node.style.transform = "rotate(0deg) scale(100%)";
+          shape1Node.style.transform = "rotate(0deg) scale(200%)";
           enlarged = false;
         }
 
         else {
-          shape1Node.style.transform = "rotate(90deg) scale(400%)";
+          shape1Node.style.transform = "rotate(90deg) scale(600%)";
           enlarged = true;
         }
 

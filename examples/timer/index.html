@@ -1,9 +1,12 @@
 <html>
   <head>
-    <title></title>
-    <script src="../../dist/js/umd/distortedges.js"></script>
-    <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="./hud.css">
+    <title>Distort Edges: Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/general.css">
+    <link rel="stylesheet" href="./css/timer.css">
+    <link rel="stylesheet" href="./css/hud.css">
+
   </head>
   <body>
 
@@ -11,35 +14,35 @@
       <div id="timer">
 
         <!-- Hours -->
-        <div class="position-center">
+        <div>
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time1">
             <path d="" fill="var(--color-object)" id="distorted-node-1"></path>
           </svg>
         </div>
         
         <!-- : -->
-        <div>
-          <svg width="25" height="58" viewBox="0 0 25 58" fill="none" xmlns="http://www.w3.org/2000/svg" class="semicolon">
-            <path d="" fill="var(--color-object)"></path>
+        <div class="colon-container">
+          <svg width="25" height="58" viewBox="0 0 25 58" fill="none" xmlns="http://www.w3.org/2000/svg" class="colon">
+            <path d="M25 12.5C25 19.4036 19.4036 25 12.5 25C5.59644 25 0 19.4036 0 12.5C0 5.59644 5.59644 0 12.5 0C19.4036 0 25 5.59644 25 12.5Z M25 45.5C25 52.4036 19.4036 58 12.5 58C5.59644 58 0 52.4036 0 45.5C0 38.5964 5.59644 33 12.5 33C19.4036 33 25 38.5964 25 45.5Z" fill="var(--color-object)"></path>
           </svg>
         </div>
 
         <!-- Minutes -->
-        <div class="position-center">
+        <div>
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time2">
             <path d="" fill="var(--color-object)" id="distorted-node-2"></path>
           </svg>
         </div>
         
         <!-- : -->
-        <div>
-          <svg width="25" height="58" viewBox="0 0 25 58" fill="none" xmlns="http://www.w3.org/2000/svg" class="semicolon">
-            <path d="" fill="var(--color-object)"></path>
+        <div class="colon-container">
+          <svg width="25" height="58" viewBox="0 0 25 58" fill="none" xmlns="http://www.w3.org/2000/svg" class="colon">
+            <path d="M25 12.5C25 19.4036 19.4036 25 12.5 25C5.59644 25 0 19.4036 0 12.5C0 5.59644 5.59644 0 12.5 0C19.4036 0 25 5.59644 25 12.5Z M25 45.5C25 52.4036 19.4036 58 12.5 58C5.59644 58 0 52.4036 0 45.5C0 38.5964 5.59644 33 12.5 33C19.4036 33 25 38.5964 25 45.5Z" fill="var(--color-object)"></path>
           </svg>
         </div>
 
         <!-- Seconds -->
-        <div class="position-center">
+        <div>
           <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" id="time3">
             <path d="" fill="var(--color-object)" id="distorted-node-3"></path>
           </svg>
@@ -61,7 +64,7 @@
 
           <span>DARK MODE</span>
           <label class="switch">
-            <input type="checkbox" onchange="toggleMode(event)">
+            <input type="checkbox" onchange="toggleMode(event)" checked>
             <span class="slider"></span>
           </label>
 
@@ -71,295 +74,7 @@
 
 
 
-    <script>
-
-      let recipe =  { time1:  { variableDistortionDistance: true,
-                                maximumDistortionDistance: 24,
-                                variableDistanceApart: false,
-                                distanceApart: 10,
-                                handleDistancePeak: 0.5,
-                                handleDistanceTrough: 0.5,
-                                keepWithinOriginalSize: false
-                              },
-                      time2:  { variableDistortionDistance: true,
-                                maximumDistortionDistance: 8,
-                                variableDistanceApart: false,
-                                distanceApart: 10,
-                                handleDistancePeak: 0.5,
-                                handleDistanceTrough: 0.5,
-                                keepWithinOriginalSize: false
-                              },
-                      time3:  { variableDistortionDistance: true,
-                                maximumDistortionDistance: 5,
-                                variableDistanceApart: false,
-                                distanceApart: 3,
-                                handleDistancePeak: 0.5,
-                                handleDistanceTrough: 0.5,
-                                keepWithinOriginalSize: false
-                              }
-      };
-
-      // For setting the state of the edges, controlled by a switch interface.
-      let roughenedEdges = true;
-
-      // For setting the inwards/outwards animation of time3, when variableDistanceApart is false.
-      let inwards = {
-        time1: true,
-        time2: true,
-        time3: true
-      };
-
-      // Set up distorted shapes.
-      let distortedNode = new DistortedShape(
-        "M200 100C200 155.228 155.228 200 100 200C44.7715 200 0 155.228 0 100C0 44.7715 44.7715 0 100 0C155.228 0 200 44.7715 200 100Z",
-        recipe.time1
-      );
-
-      const distortedNode1 = document.getElementById("distorted-node-1"),
-            distortedNode2 = document.getElementById("distorted-node-2"),
-            distortedNode3 = document.getElementById("distorted-node-3");
-
-      // Create SVG path variables with distortions.
-      distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
-      distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
-      distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
-
-      window.setInterval(refreshSVGPath, 3000, "1");
-      window.setInterval(refreshSVGPath, 1000, "2");
-      window.setInterval(refreshSVGPath, 100, "3");
-
-
-      // Sets up blinking animation for semi-colons.
-      const semicolonElements = document.querySelectorAll(".semicolon");
-      window.setInterval(() => {
-        
-        if (semicolonElements[0].style.visibility === "hidden") {
-
-          for (let element of semicolonElements) {
-            element.style.visibility = "visible";
-          }
-
-        }
-        else {
-
-          for (let element of semicolonElements) {
-            element.style.visibility = "hidden";
-          }
-
-        }
-
-      }, 1000);
-
-
-      function toggleMode(e) {
-
-        if (e.currentTarget.checked) {
-
-          document.documentElement.style.setProperty("--color-object", "#fff");
-          document.documentElement.style.setProperty("--color-bg", "#000");
-
-        }
-
-        else {
-
-          document.documentElement.style.setProperty("--color-object", "#000");
-          document.documentElement.style.setProperty("--color-bg", "#fff");
-
-        }
-
-      }
-
-
-      function toggleEdge(e) {
-        
-        if (e.currentTarget.checked) {
-
-          recipe.time1.distanceApart = 140;
-          recipe.time1.variableDistortionDistance = false;
-          recipe.time1.keepWithinOriginalSize = true;
-
-          recipe.time2.distanceApart = 14;
-          recipe.time2.variableDistortionDistance = false;
-          recipe.time2.keepWithinOriginalSize = true;
-
-          recipe.time3.maximumDistortionDistance = 1;
-          recipe.time3.variableDistortionDistance = false;
-          recipe.time3.keepWithinOriginalSize = true;
-
-          distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
-          distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
-          distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
-          
-          roughenedEdges = false;
-
-        }
-
-        else {
-
-          recipe.time1.distanceApart = 10;
-          recipe.time1.variableDistortionDistance = true;
-          recipe.time1.keepWithinOriginalSize = false;
-
-          recipe.time2.distanceApart = 10;
-          recipe.time2.variableDistortionDistance = true;
-          recipe.time1.keepWithinOriginalSize = false;
-
-          recipe.time3.distanceApart = 3;
-          recipe.time3.variableDistortionDistance = true;
-          recipe.time1.keepWithinOriginalSize = false;
-
-          distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
-          distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
-          distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
-          
-          roughenedEdges = true;
-
-        }
-
-      }
-
-
-      // Function to recreate SVG every 1s.
-      function refreshSVGPath(nodeNr) {
-
-        switch (nodeNr) {
-
-          case "1":
-
-            if (roughenedEdges) {
-
-              recipe.time1.maximumDistortionDistance = 24;
-              recipe.time1.handleDistancePeak = 0.5;
-
-            }
-
-            else {
-            
-              // Sets it so that the animation will go the other way once it has reached the maximum distance or the minimum.
-              if (recipe.time1.maximumDistortionDistance >= 74)
-                inwards.time1 = true;
-
-              else if (recipe.time1.maximumDistortionDistance <= 24)
-                inwards.time1 = false;
-
-
-              if (inwards.time1) {
-
-                recipe.time1.maximumDistortionDistance -= 2.5;
-
-                if (recipe.time1.handleDistancePeak >= 0.5)
-                  recipe.time1.handleDistancePeak -= 0.1;
-
-              }
-
-              else {
-
-                recipe.time1.maximumDistortionDistance += 2.5;
-
-                if (recipe.time1.handleDistancePeak <= 1)
-                  recipe.time1.handleDistancePeak += 0.1;
-
-              }
-
-            }
-
-            distortedNode1.setAttribute("d", distortedNode.getDrawCommands(recipe.time1));
-
-            break;
-
-
-          case "2":
-
-            if (roughenedEdges) {
-
-              recipe.time2.maximumDistortionDistance = 8;
-              recipe.time2.handleDistancePeak = 0.5;
-
-            }
-
-            else {
-
-              // Sets it so that the animation will go the other way once it has reached the maximum distance or the minimum.
-              if (recipe.time2.maximumDistortionDistance >= 58)
-                inwards.time2 = true;
-
-              else if (recipe.time2.maximumDistortionDistance <= 8)
-                inwards.time2 = false;
-
-
-              if (inwards.time2) {
-
-                recipe.time2.maximumDistortionDistance -= 2.5;
-
-                if (recipe.time2.handleDistancePeak >= 0.5)
-                  recipe.time2.handleDistancePeak -= 0.05;
-
-              }
-
-              else {
-
-                recipe.time2.maximumDistortionDistance += 2.5;
-
-                if (recipe.time2.handleDistancePeak <= 1)
-                  recipe.time2.handleDistancePeak += 0.05;
-
-              }
-
-            }
-
-            distortedNode2.setAttribute("d", distortedNode.getDrawCommands(recipe.time2));
-
-            break;
-
-
-          case "3":
-
-            if (roughenedEdges) {
-
-              recipe.time3.maximumDistortionDistance = 4;
-              recipe.time3.handleDistancePeak = 0.5;
-
-            }
-
-            else {
-
-              // Sets it so that the animation will go the other way once it has reached the maximum distance or the minimum.
-              if (recipe.time3.maximumDistortionDistance >= 55)
-                inwards.time3 = true;
-
-              else if (recipe.time3.maximumDistortionDistance <= 5)
-                inwards.time3 = false;
-
-
-              if (inwards.time3) {
-
-                recipe.time3.maximumDistortionDistance -= 2.5;
-
-                if (recipe.time3.handleDistancePeak >= 0.5)
-                  recipe.time3.handleDistancePeak -= 0.05;
-
-              }
-
-              else {
-
-                recipe.time3.maximumDistortionDistance += 2.5;
-
-                if (recipe.time3.handleDistancePeak <= 1)
-                  recipe.time3.handleDistancePeak += 0.05;
-
-              }
-
-            }
-
-            distortedNode3.setAttribute("d", distortedNode.getDrawCommands(recipe.time3));
-
-            break;
-
-        }
-
-      }
-
-    </script>
+    <script type="module" src="./js/main.js"></script>
     
   </body>
 </html>

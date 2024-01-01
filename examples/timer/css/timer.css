@@ -1,0 +1,80 @@
+#timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  height: calc(100vh - 3rem);
+  width: 100vw;
+}
+
+@media only screen and (orientation: portrait) {
+  
+  #timer {
+    flex-direction: column;
+    gap: clamp(0.5rem, 3vh, 3rem) !important;
+  }
+
+}
+
+#timer > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (orientation: portrait) {
+
+  #timer > div {
+    max-height: 15vh;
+  }
+
+}
+
+@media only screen and (orientation: landscape) and (max-width: 879px) {
+
+  #timer > div {
+    max-width: 25vh;
+  }
+
+}
+
+#time1, #time2, #time3 {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media only screen and (orientation: portrait) {
+
+  .colon {
+    transform: rotate(90deg) scale(0.6);
+  }
+
+}
+
+@media only screen and (orientation: landscape) and (max-width: 879px) {
+
+  .colon {
+    transform: scale(0.6);
+  }
+
+}
+
+
+
+/* Morph animations */
+#distorted-node-1 {
+  transition: var(--transition-time1);
+}
+
+#distorted-node-2 {
+  transition: var(--transition-time2);
+}
+
+#distorted-node-3 {
+  transition: var(--transition-time3);
+}
+
+.colon path {
+  transition: var(--transition-all);
+}

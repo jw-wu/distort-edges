@@ -1,11 +1,12 @@
 <html>
   <head>
-    <title></title>
-    <script src="../../dist/js/umd/distortedges.js"></script>
-    <link rel="stylesheet" href="./solar.css">
-    <link rel="stylesheet" href="./hud.css">
+    <title>Distort Edges: Solar</title>
+    
+    <link rel="stylesheet" href="./css/general.css">
+    <link rel="stylesheet" href="./css/solar.css">
+    <link rel="stylesheet" href="./css/hud.css">
   </head>
-  <body style="background-color: var(--space-bg);">
+  <body">
 
     <div id="space">
 
@@ -35,7 +36,7 @@
 
           <!-- Paths. -->
           <path d="" id="sun-flare" fill="#ff330050"></path>
-          <path d="" id="sun-edge" fill="url('#colorOfTheSun')"></path>
+          <path d="" id="sun-nucleus" fill="url('#colorOfTheSun')"></path>
         </svg>
       </div>
     </div>
@@ -46,129 +47,9 @@
     </div>
 
 
-    <script>
-
-      let recipe =  { flare:          { variableDistortionDistance: true,
-                                        maximumDistortionDistance: 0,
-                                        variableDistanceApart: true,
-                                        minDistanceApart: 10,
-                                        maxDistanceApart: 30,
-                                        handleDistancePeak: 0.5,
-                                        handleDistanceTrough: 0.5,
-                                        keepWithinOriginalSize: false,
-                                      },
-                      edge:           { variableDistortionDistance: true,
-                                        maximumDistortionDistance: 0.75,
-                                        variableDistanceApart: false,
-                                        distanceApart: 3,
-                                        handleDistancePeak: 0.5,
-                                        handleDistanceTrough: 0.5,
-                                        keepWithinOriginalSize: false,
-                                      }
-      }
-
-      
-      // Init.
-      const sun = document.getElementById("sun"),
-            sunContainer = document.getElementById("sun-container");
-
-      const zoom = document.getElementById("zoom");
-
-
-      // Get svg paths.
-      const sunFlare = document.getElementById("sun-flare"),
-            sunEdge = document.getElementById("sun-edge");
-
-
-      // Create distorted paths.
-      let sunFlareShape = new DistortedShape("M400 4.99997C618.152 4.99996 795 181.847 795 400C795 618.152 618.152 795 400 795C181.848 795 4.99999 618.152 4.99998 400C4.99997 181.848 181.847 4.99998 400 4.99997Z", recipe.flare);
-
-      let sunEdgeShape = new DistortedShape("M400 0C620.914 0 800 179.086 800 400C800 620.914 620.914 800 400 800C179.086 800 0 620.914 0 400C0 179.086 179.086 0 400 0Z", recipe.edge);
-
-
-      // Starts the flare shape with 0 maximumDistortionDistance, to ensure that the flares "grows" out from a nothing, so that it appears less jarring.
-      refreshSVGPath("flare");
-      recipe.flare.maximumDistortionDistance = 12;
-      window.setInterval(refreshSVGPath, 3000, "flare");
-
-      // Draws the distorted edges for the sun edge.
-      refreshSVGPath("edge");
-      window.setInterval(refreshSVGPath, 500, "edge");
-
-
-      // Zoom button functionality.
-      function zoomView() {
-
-        if (sun.classList.contains("fit-to-width")) {
-          sunContainer.style.opacity = "0";
-
-          window.setTimeout(() => {
-
-            sun.classList.remove("fit-to-width");
-            sun.classList.add("fit-to-height");
-
-            sunContainer.classList.remove("fit-to-width");
-            sunContainer.classList.add("fit-to-height");
-            sunContainer.style.opacity = "1";
-
-            sunburst.classList.remove("fit-to-width");
-            sunburst.classList.add("fit-to-height");
-
-            sunburstContainer.classList.remove("fit-to-width");
-            sunburstContainer.classList.add("fit-to-height");
-
-            zoom.textContent = "ZOOM IN";
-
-          }, 400);
-
-        }
-
-        else {
-
-          sunContainer.style.opacity = "0";
-
-          window.setTimeout(() => {
-
-            sun.classList.remove("fit-to-height");
-            sun.classList.add("fit-to-width");
-
-            sunContainer.classList.remove("fit-to-height");
-            sunContainer.classList.add("fit-to-width");
-            sunContainer.style.opacity = "1";
-
-            sunburst.classList.remove("fit-to-height");
-            sunburst.classList.add("fit-to-width");
-
-            sunburstContainer.classList.remove("fit-to-height");
-            sunburstContainer.classList.add("fit-to-width");
-
-            zoom.textContent = "ZOOM OUT";
-
-          }, 400);
-
-        }
-
-      }
-
-
-      // Functions to recreate distorted edges.
-      function refreshSVGPath(sunVariant) {
-
-        switch(sunVariant) {
-
-          case "flare":
-            sunFlare.setAttribute("d", sunFlareShape.getDrawCommands(recipe.flare));
-            break;
-          
-          case "edge":
-            sunEdge.setAttribute("d", sunEdgeShape.getDrawCommands(recipe.edge));
-            break;
-
-        }
-        
-      }
-
-    </script>
+    <script type="module" src="./js/zoom.js"></script>
+    <script type="module" src="./js/sun-nucleus.js"></script>
+    <script type="module" src="./js/sun-flare.js"></script>
     
   </body>
 </html>

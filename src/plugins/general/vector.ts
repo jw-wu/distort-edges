@@ -12,6 +12,7 @@ function roundOff(number: number) {
 }
 
 
+
 // Flips the handle coords with the point coords set as origin
 export function flipHandle(handle: Vector, origin: Vector) {
 
@@ -78,6 +79,8 @@ export function getQuadraticPathLength(start: Vector, handle: Vector, end: Vecto
 
 export function getCubicPathLength(start: Vector, handle1: Vector, handle2: Vector, end: Vector): number {
 
+  // Check https://stackoverflow.com/questions/17099776/trying-to-find-length-of-a-bezier-curve-with-4-points for an alternative method.
+
   // Split a curve into smaller "linear" segments to calculate approx length.
   let segments = 30,
       totalLength = 0;
@@ -101,7 +104,7 @@ export function getCubicPathLength(start: Vector, handle1: Vector, handle2: Vect
     }
 
   }
-
+  
   return roundOff(totalLength);
 
 }
@@ -145,19 +148,24 @@ export function getPointOnLine(start: Vector, end: Vector, position: number): Ve
 
 export function getPointOnQuadraticCurve(start: Vector, handle: Vector, end: Vector, position: number): Vector {
 
-  const firstOrder = {
-    handle1: getPointOnLine(start, handle, position),
-    handle2: getPointOnLine(handle, end, position)
-  };
+  /* const firstOrder = { */
+  /*   handle1: getPointOnLine(start, handle, position), */
+  /*   handle2: getPointOnLine(handle, end, position) */
+  /* }; */
 
-  return getPointOnLine(firstOrder.handle1, firstOrder.handle2, position);
+  /* return getPointOnLine(firstOrder.handle1, firstOrder.handle2, position); */
+
+  const x = (1 - position) * (1 - position) * start.x + 2 * (1 - position) * position * handle.x + position * position * end.x;
+  const y = (1 - position) * (1 - position) * start.y + 2 * (1 - position) * position * handle.y + position * position * end.y;
+
+  return { x, y };
 
 }
 
 
 export function getPointOnCubicCurve(start: Vector, handle1: Vector, handle2: Vector, end: Vector, position: number): Vector {
-
-  const firstOrder = {
+  
+  /* const firstOrder = {
     handle1: getPointOnLine(start, handle1, position),
     middle: getPointOnLine(handle1, handle2, position),
     handle2: getPointOnLine(handle2, end, position)
@@ -168,13 +176,21 @@ export function getPointOnCubicCurve(start: Vector, handle1: Vector, handle2: Ve
     handle2: getPointOnLine(firstOrder.middle, firstOrder.handle2, position)
   };
 
-  return getPointOnLine(secondOrder.handle1, secondOrder.handle2, position);
+  return getPointOnLine(secondOrder.handle1, secondOrder.handle2, position); */
+
+  // https://stackoverflow.com/questions/5634460/quadratic-b%C3%A9zier-curve-calculate-points
+  const x = (1 - position) * (1 - position) * (1 - position) * start.x + 3 * (1 - position) * (1 - position) * position * handle1.x + 3 * (1 - position) * position * position * handle2.x + position * position * position * end.x;
+
+  const y = (1 - position) * (1 - position) * (1 - position) * start.y + 3 * (1 - position) * ( 1 - position) * position * handle1.y + 3 * (1 - position) * position * position * handle2.y + position * position * position * end.y;
+
+  return { x, y };
 
 }
 
 
 
-// Gets the angle of a line.
+// Get the angle of a line. Angle goes in a counter-clockwise direction with 0° starting on the east.
+// From x0, y0: x10, y0 = 0°, x10, y-10 = 45°, x0, y-10 = 90°
 export function getAbsoluteAngle(start: Vector, end: Vector): number {
 
   const moveDistance = { x: 0 - start.x, y: 0 - start.y },
@@ -188,7 +204,7 @@ export function getAbsoluteAngle(start: Vector, end: Vector): number {
 }
 
 
-// Gets the nearest cardinal angle (NSEW) of the line.
+// Get the nearest cardinal angle (NSEW) of the line.
 export function getCardinalAngle(start: Vector, end: Vector): number {
 
   let angleDeg = getAbsoluteAngle(start, end);
@@ -208,7 +224,7 @@ export function getCardinalAngle(start: Vector, end: Vector): number {
 }
 
 
-// Gets the nearest intercardinal angle of the line.
+// Get the nearest intercardinal angle of the line.
 export function getIntercardinalAngle(start: Vector, end: Vector): number {
 
   let angleDeg = getAbsoluteAngle(start, end);
@@ -228,7 +244,22 @@ export function getIntercardinalAngle(start: Vector, end: Vector): number {
 }
 
 
-// Gets the coords, given the angle and the distance.
+// Get the clockwise angle between two lines.
+// https://stackoverflow.com/questions/56147279/how-to-find-angle-between-two-vectors-on-canvas
+export function getVertexAngle(input: {
+  line1: { start: { x: number, y: number }, end: { x: number, y: number } },
+  line2: { start: { x: number, y: number }, end: { x: number, y: number } }
+}) {
+
+  const firstAngle = Math.atan2(input.line1.start.y - input.line1.end.y, input.line1.start.x - input.line1.end.x),
+        secondAngle = Math.atan2(input.line2.end.y - input.line2.start.y, input.line2.end.x - input.line2.start.x);
+
+  return Math.abs(trigonometry.radToDeg(secondAngle - firstAngle));
+
+}
+
+
+// Get the coords, given the angle and the distance.
 export function getCoordsFromAbsoluteAngle(angleDegrees: number, distance: number): Vector {
 
   const angleRadians = angleDegrees * (Math.PI / 180),
@@ -241,7 +272,7 @@ export function getCoordsFromAbsoluteAngle(angleDegrees: number, distance: numbe
 
 
 
-// Gets the perpendicular angle, given an angle.
+// Get the perpendicular angle, given an angle.
 export function getPerpendicularAngle(angleDegrees: number, direction: "clockwise" | "counter-clockwise"): number {
 
   let perpendicularAngle = (direction === "clockwise") ?
@@ -259,7 +290,7 @@ export function getPerpendicularAngle(angleDegrees: number, direction: "clockwis
 }
 
 
-// Gets a point perpendicular to an angle, given a distance.
+// Get a point perpendicular to an angle, given a distance.
 export function getPointPerpendicularToAngle(angle: number, origin: Vector, distance: number, direction: "clockwise" | "counter-clockwise"): Vector {
 
   if (distance === 0)

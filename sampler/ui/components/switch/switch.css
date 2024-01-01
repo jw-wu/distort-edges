@@ -1,0 +1,167 @@
+/* Menu */
+
+.component.switch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 0.5rem;
+
+  padding: var(--default-padding);
+}
+
+.component.switch.small {
+  padding: 0.35rem 0.5rem 0.35rem 0.7rem;
+  row-gap: 0.25rem;
+}
+
+.component.switch.medium {
+  padding: 0.5rem 0.7rem 0.5rem 1rem;
+  row-gap: 0.25rem;
+}
+
+.component.switch.large {
+  padding: 0.5rem 0.7rem 0.5rem 1rem;
+  row-gap: 0.5rem;
+}
+
+.component.switch.border-bottom {
+  border-bottom: var(--border-divider);
+}
+
+.component.switch.border-bottom:last-of-type {
+  border-bottom: 0;
+}
+
+
+
+/* Label */
+
+.component.switch label {
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+/* Label text */
+
+.component.switch .label-text {
+  font-size: var(--typography-inputlabel-size) !important;
+  padding: 0.5rem 0;
+}
+
+
+
+/* Input */
+
+.component.switch input {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+}
+
+
+
+/* Slider */
+
+.component.switch .slider {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.component.switch.small .slider {
+  width: 1.75rem;
+  height: 1rem;
+
+  border-radius: 0.5rem;
+}
+
+.component.switch.medium .slider {
+  width: 2.75rem;
+  height: 1.5rem;
+
+  border-radius: 0.75rem;
+}
+
+.component.switch.large .slider {
+  width: 5rem;
+  height: 3rem;
+
+  border-radius: 1.5rem;
+}
+
+.component.switch.contained.primary .slider {
+  background-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.primary input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+.component.switch.contained.secondary .slider {
+  background-color: color-mix(in srgb, var(--color-secondary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.secondary input:checked + .slider {
+  background-color: var(--color-secondary);
+}
+
+.component.switch.contained.tertiary .slider {
+  background-color: color-mix(in srgb, var(--color-tertiary) 50%, var(--color-bg));
+}
+
+.component.switch.contained.tertiary input:checked + .slider {
+  background-color: var(--color-tertiary);
+}
+
+
+
+/* Handle */
+
+.component.switch .handle {
+  content: " ";
+  background-color: var(--color-bg);
+
+  position: absolute;
+  top: 0.25rem;
+
+  border-radius: 50%;
+
+  transition: var(--transition-fast);
+}
+
+.component.switch.small .handle {
+  width: 0.5rem;
+  height: 0.5rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.small input:checked + .slider .handle {
+  left: 1rem !important;
+}
+
+.component.switch.medium .handle {
+  width: 1rem;
+  height: 1rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.medium input:checked + .slider .handle {
+  left: 1.5rem !important;
+}
+
+.component.switch.large .handle {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  left: 0.25rem;
+}
+
+.component.switch.large input:checked + .slider .handle {
+  left: 2.25rem !important;
+}

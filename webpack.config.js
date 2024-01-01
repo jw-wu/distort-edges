@@ -10,7 +10,7 @@ const figmaScript = {
 // Add ui TS scripts here. All paths relative to "./src/custom/modules/". e.g. "module-ui.ts"
 const uiScripts = [
 
-  "figma/main-ui.ts"
+  "figma/ui/gui.ts"
 
 ];
 
@@ -23,7 +23,7 @@ const webScripts = [
       export: "default"
     },
     file: {
-      "js/umd/distortedges": "./src/custom/scripts/engine/entry.ts"
+      "js/umd/distortedges": "./src/custom/scripts/engine/main.ts"
     }
   },
   {
@@ -32,7 +32,7 @@ const webScripts = [
       export: "default"
     },
     file: {
-      "js/module/distortedges": "./src/custom/scripts/engine/entry.ts"
+      "js/module/distortedges": "./src/custom/scripts/engine/main.ts"
     }
   }
 ];

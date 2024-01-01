@@ -1,0 +1,27 @@
+:root {
+  --palette-dark: #000;
+  --palette-light: #fff;
+
+  --color-object: var(--palette-light);
+  --color-bg: var(--palette-dark);
+
+  --transition-general: all .5s cubic-bezier(0.8, 0, 0.2, 1);
+  --transition-time1: d 1s cubic-bezier(0.8, 0, 0.2, 1);
+  --transition-time2: d 1s cubic-bezier(0.8, 0, 0.2, 1);
+  --transition-time3: d .1s ease-out;
+}
+
+html {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-bg);
+  transition: var(--transition-all);
+}
+
+svg {
+  overflow: visible;
+}

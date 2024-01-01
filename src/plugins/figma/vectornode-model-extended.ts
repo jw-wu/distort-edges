@@ -1,6 +1,6 @@
 /* Engine */
-import * as util from "../../custom/scripts/engine/utility";
-import { DistortEdgesRecipe } from "../../custom/scripts/engine/distortion-recipe";
+import * as util from "../../custom/scripts/engine/settings/utility";
+import { DistortEdgesRecipe } from "../../custom/scripts/engine/distortion/recipe";
 
 /* Plugins */
 import { VectorNodeModel, VectorPathCommand } from "./vectornode-model";
@@ -65,10 +65,15 @@ export class DistortedNodeModel extends VectorNodeModel {
 
     else if (vectorCommand.type === "L" || vectorCommand.type === "Q" || vectorCommand.type === "C") {
 
-      const startingPoint = this.getPreviousCommand(vectorCommand);
+      let startingPoint = this.getPreviousCommand(vectorCommand);
+
       let pathSegment: DistortedNodePathSegment = { pathLength: 0, subSegments: 0, increments: [ ], subpoints: [ ] };
 
       if (startingPoint) {
+
+        // If the starting point is a Z, use the M details. Happens within Figma.
+        if (startingPoint.type === "Z")
+          startingPoint = this.getFirstCommandOnPath(startingPoint);
     
         // Get the total length of the path.
         if (vectorCommand.type === "L")
@@ -148,72 +153,81 @@ export class DistortedNodeModel extends VectorNodeModel {
     else if (vectorCommand.type !== "Z") {
 
       // Get coords of current, previous and next subpoints.
-      let currentSubpoint = vectorManipulation.getPointOnPath(vectorCommand.origin, vectorCommand.coords, vectorCommand.handles, pathSegment.increments[0])!,
-          previousSubpoint = vectorCommand.origin,
-          accumulatedPosition = pathSegment.increments[0];
+      let currentSubpointCoords = vectorManipulation.getPointOnPath(vectorCommand.origin, vectorCommand.coords, vectorCommand.handles, pathSegment.increments[0]);
 
-      // Start segmentation.
-      for (let s = 0; s < pathSegment.subSegments; ++s) {
+      if (currentSubpointCoords === null) {
+
+        console.error("Current subpoint coords in the Extended Vector Node Model cannot be determined.");
+        return;
         
-        const segmentDistance = pathSegment.increments[s] * pathSegment.pathLength;
+      }
 
-        let nextSubpoint = { x: NaN, y: NaN };
-        
-        
-        // Calculate slope for the previous subpoint if previous subpoint is not M or Z.
-        const previousCommand = this.getPreviousCommand(vectorCommand);
-        if (s === 0 && previousCommand && previousCommand.type !== "M" && previousCommand.type !== "Z") {
+      else {
 
-          const previousPathSegment = this.getPathSegmentByCommand(previousCommand);
-          let previousSubpoint = previousPathSegment.subpoints[previousPathSegment.subpoints.length - 1];
+        let previousSubpointCoords = vectorCommand.origin,
+            accumulatedPosition = pathSegment.increments[0],
+            nextSubpointCoords = { x: NaN, y: NaN };
 
-
-          const slopeStart = vectorManipulation.getPointOnPath(
-            previousCommand.origin,
-            previousCommand.coords,
-            previousCommand.handles,
-            1 - previousPathSegment.increments[previousPathSegment.increments.length - 1]
-          );
-
-          const slopeEnd = currentSubpoint;
+        // Start segmentation.
+        for (let s = 0; s < pathSegment.subSegments; ++s) {
           
-          if (slopeStart)
-            previousSubpoint.slope = vectorManipulation.getAbsoluteAngle(slopeStart, slopeEnd);
+          const segmentDistance = pathSegment.increments[s] * pathSegment.pathLength;         
+          
+          // Calculate slope for the previous subpoint if previous subpoint is not M or Z.
+          const previousCommand = this.getPreviousCommand(vectorCommand);
+          if (s === 0 && previousCommand && previousCommand.type !== "M" && previousCommand.type !== "Z") {
 
-          else
-            console.error("Starting point of slope cannot be determined.");
+            const previousPathSegment = this.getPathSegmentByCommand(previousCommand);
+            let previousSubpoint = previousPathSegment.subpoints[previousPathSegment.subpoints.length - 1];
+
+            const slopeStart = vectorManipulation.getPointOnPath(
+              previousCommand.origin,
+              previousCommand.coords,
+              previousCommand.handles,
+              1 - previousPathSegment.increments[previousPathSegment.increments.length - 1]
+            );
+
+            const slopeEnd = currentSubpointCoords;
+            
+            if (slopeStart)
+              previousSubpoint.slope = vectorManipulation.getAbsoluteAngle(slopeStart, slopeEnd);
+
+            else
+              console.error("Starting point of slope cannot be determined.");
+
+          }
+
+
+          // Not last segment.
+          if (s !== pathSegment.subSegments - 1) {
+
+            accumulatedPosition += pathSegment.increments[s + 1];
+            nextSubpointCoords = vectorManipulation.getPointOnPath(vectorCommand.origin, vectorCommand.coords, vectorCommand.handles, accumulatedPosition)!;
+
+            this.getPathSegmentByCommand(vectorCommand).subpoints.push({
+              coords: currentSubpointCoords,
+              slope: vectorManipulation.getAbsoluteAngle(previousSubpointCoords, nextSubpointCoords),
+              segmentDistance: segmentDistance
+            });
+
+          }
+
+          // Last segment.
+          else {
+
+            this.getPathSegmentByCommand(vectorCommand).subpoints.push({
+              coords: currentSubpointCoords,
+              slope: 0,
+              segmentDistance: segmentDistance
+            });
+
+          }
+
+          previousSubpointCoords = currentSubpointCoords;
+          currentSubpointCoords = nextSubpointCoords;
 
         }
-
-
-        // Not last segment.
-        if (s !== pathSegment.subSegments - 1) {
-
-          accumulatedPosition += pathSegment.increments[s + 1];
-          nextSubpoint = vectorManipulation.getPointOnPath(vectorCommand.origin, vectorCommand.coords, vectorCommand.handles, accumulatedPosition)!;
-
-          this.getPathSegmentByCommand(vectorCommand).subpoints.push({
-            coords: currentSubpoint,
-            slope: vectorManipulation.getAbsoluteAngle(previousSubpoint, nextSubpoint),
-            segmentDistance: segmentDistance
-          });
-
-        }
-
-        // Last segment.
-        else {
-
-          this.getPathSegmentByCommand(vectorCommand).subpoints.push({
-            coords: currentSubpoint,
-            slope: 0,
-            segmentDistance: segmentDistance
-          });
-
-        }
-
-        previousSubpoint = currentSubpoint;
-        currentSubpoint = nextSubpoint;
-
+      
       }
 
     }
@@ -396,11 +410,11 @@ interface DistortedNodePathSegment {
 
 
 export interface ExtendedVectorNodeModelSettings {
-  variableDistanceApart: boolean;
-  distanceApart?: number;
-  minDistanceApart?: number;
-  maxDistanceApart?: number;
-  keepWithinOriginalSize: boolean;
+  variableDistanceApart: boolean;   // Should the sub-segment points be a regular distance from each other?
+  distanceApart?: number;           // Distance between each sub-segment point.
+  minDistanceApart?: number;        // Minimum distance between each point.
+  maxDistanceApart?: number;        // Maximum distance between each point.
+  keepWithinOriginalSize: boolean;  // Should the shape extend beyond its original boundaries. Needed for corners. (See if it can be moved to recipe)
 }
 
 
@@ -414,25 +428,25 @@ export const isExtendedVectorNodeModelSettings = (input: any): input is DistortE
 );
 
 
-export function logSettingsErrors(recipe: any) {
+export function logSettingsErrors(settings: any) {
 
-  if (typeof recipe.variableDistanceApart === "undefined")
+  if (typeof settings.variableDistanceApart === "undefined")
     console.error("Parameter \"variableDistanceApart\" missing.");
 
-  else if (typeof recipe.variableDistanceApart !== "boolean")
+  else if (typeof settings.variableDistanceApart !== "boolean")
     console.error("Parameter \"variableDistanceApart\" needs to be a boolean.");
 
-  if (!recipe.variableDistanceApart && !recipe.distanceApart)
+  if (!settings.variableDistanceApart && !settings.distanceApart)
     console.error("Parameter \"distanceApart\" missing.");
 
-  else if (!recipe.variableDistanceApart && typeof recipe.distanceApart !== "number")
+  else if (!settings.variableDistanceApart && typeof settings.distanceApart !== "number")
     console.error("Parameter \"distanceApart\" needs to be a number.");
 
 
-  if (typeof recipe.keepWithinOriginalSize === "undefined")
+  if (typeof settings.keepWithinOriginalSize === "undefined")
     console.error("Parameter \"keepWithinOriginalSize\" missing.");
 
-  else if (typeof recipe.keepWithinOriginalSize !== "boolean")
+  else if (typeof settings.keepWithinOriginalSize !== "boolean")
     console.error("Parameter \"keepWithinOriginalSize\" needs to be a boolean.");
 
 }
