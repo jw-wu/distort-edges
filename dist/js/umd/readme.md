@@ -1,7 +1,12 @@
 Script is exported as a UMD module with Webpack 5.
 
 1. Import via ```import DistortedShape from "path/to/script"```, or as an ESM with ```import "path/to/script"```.
-2. Create a new DistortedShape class ```let distortion = new DistortedShape(path, settings, recipe)```;
+2. Create a new DistortedShape class ```let distortion = new DistortedShape(path, settings)```;
+3. Call the available methods ```distortion.getDrawCommands(recipe)``` or ```distortion.getAll(recipe)```;
+
+The following alternative is possible as well:
+```let distortion = new DistortedShape(path, settings, recipe)```
+```distortion.getDrawCommands()```
 
 
 **Parameters**
@@ -26,3 +31,11 @@ The SVG code or the ```d``` value in an SVG.
 | handleDistancePeak          | number              | How round should the peak of the apexes be?                     |
 | handleDistanceTrough        | number              | How round should the troughs of the apexes be?                  |
 | forceDistortion             | boolean | undefined | Should the sub-segments be distorted even if they are small?    |
+
+
+**Methods**
+
+| Method                    | Return type                                         | Description                                                                   |
+| :---                      | :---                                                | :---                                                                          |
+| getDrawCommands           | string                                              | Returns the svg ```d``` path.                                                 |
+| getAll                    | { path: string, center: { x: number, y: number } }  | Returns the svg ```d``` path and the coordinates of the shape's center point. |
