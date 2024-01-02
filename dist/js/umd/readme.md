@@ -5,14 +5,16 @@ Script is exported as a UMD module with Webpack 5.
 3. Call the available methods ```distortion.getDrawCommands(recipe)``` or ```distortion.getAll(recipe)```;
 
 The following alternative is possible as well:
-```let distortion = new DistortedShape(path, settings, recipe)```
-```distortion.getDrawCommands()```
+```
+let distortion = new DistortedShape(path, settings, recipe)
+distortion.getDrawCommands()
+```
 
 
 **Parameters**
 
 ```path: string```
-The SVG code or the ```d``` value in an SVG.
+The SVG code or the ```d``` value in an SVG. Currently works only with uppercase primitive commands ```M, L, C, Q, Z```.
 
 ```settings: object```
 | Property                | Type      | Description                                                                                         |
