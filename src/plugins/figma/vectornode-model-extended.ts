@@ -1,11 +1,18 @@
-/* Engine */
-import * as util from "../../custom/scripts/engine/settings/utility";
-import { DistortEdgesRecipe } from "../../custom/scripts/engine/distortion/recipe";
-
 /* Plugins */
 import { VectorNodeModel, VectorPathCommand } from "./vectornode-model";
 import * as vectorManipulation from "../general/vector";
 import * as random from "../general/random";
+
+
+
+// All results are rounded off to X decimal places to reduce issues with exponentials.
+const decPlaces = 3;
+
+function roundOff(number: number) {
+
+  return Math.round(number * Math.pow(10, decPlaces)) / Math.pow(10, decPlaces);
+
+}
 
 
 
@@ -338,7 +345,7 @@ export class DistortedNodeModel extends VectorNodeModel {
     while (distanceLeft > 0) {
 
       let randomDistancePercentage = random.randomNumberWithinRange(minDistanceApartPercentage, maxDistanceApartPercentage) / 2,
-          newDistance = util.roundOff(randomDistancePercentage * pathLength);
+          newDistance = roundOff(randomDistancePercentage * pathLength);
           
 
       if (distanceLeft <= minimumDistance) {
@@ -347,7 +354,7 @@ export class DistortedNodeModel extends VectorNodeModel {
           variableDistanceProportions.push(1);
 
         else
-          variableDistanceProportions[variableDistanceProportions.length - 1] += util.roundOff(distanceLeft / pathLength);
+          variableDistanceProportions[variableDistanceProportions.length - 1] += roundOff(distanceLeft / pathLength);
 
         break;
 
@@ -418,7 +425,7 @@ export interface ExtendedVectorNodeModelSettings {
 }
 
 
-export const isExtendedVectorNodeModelSettings = (input: any): input is DistortEdgesRecipe => (
+export const isExtendedVectorNodeModelSettings = (input: any): input is ExtendedVectorNodeModelSettings => (
   "variableDistanceApart" in input &&
   "keepWithinOriginalSize" in input &&
   (

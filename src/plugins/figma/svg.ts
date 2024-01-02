@@ -127,6 +127,18 @@ export function simplifySvgCommands(d: string): string {
         break;
 
 
+      case "m":
+
+        x += coords[0];
+        y += coords[1];
+
+        vectorData = (vectorData.length === 0 ) ?
+          `${commandDirection} ${x} ${y}`:
+          `${vectorData} ${commandDirection} ${x} ${y}`;
+
+      break;
+
+
       case "L":
 
         x = coords[0];
